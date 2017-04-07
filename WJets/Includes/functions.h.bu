@@ -1,0 +1,274 @@
+void barre_de_progression(int pourcentage){
+   string progression = "[";
+   for (int i=0; i<pourcentage; i++){ progression += "="; }
+   for (int i=0; i<(100-pourcentage); i++){ progression += " "; }
+   progression += "]";
+   std::ostringstream oss; oss << pourcentage;
+   std::string pourcentage_str = oss.str();
+   for (int i=0; i < (int) pourcentage_str.size(); i++){ progression[49+i] = pourcentage_str[i]; }
+   if (pourcentage<100) cout << "\t" << progression << "\r" ;
+   else cout << "\t" << progression << endl;
+}
+
+struct leptonStruct{
+   double pt, eta, phi, energy, charge, iso ;
+};
+
+struct jetStruct{
+   double pt, eta, phi, energy;
+   int patIndex;
+};
+
+bool LepDescendingOrder(leptonStruct l1, leptonStruct l2){
+   return (l1.pt > l2.pt);
+}
+
+bool JetDescendingOrder(jetStruct j1, jetStruct j2){
+   return (j1.pt > j2.pt);
+}
+
+/*TH1F *newHisto(string name, string title, string xTitle, int nBins, double *xBins ){
+   TH1F* hist = new TH1F(name.c_str(), title.c_str(), nBins, xBins);
+   hist->GetXaxis()->SetTitle(xTitle.c_str());
+   hist->GetYaxis()->SetTitle("# Events");
+   return hist;
+}*/
+
+TH1D *newHisto(string name, string title, string xTitle, int nBins, double *xBins ){
+   TH1D* hist = new TH1D(name.c_str(), title.c_str(), nBins, xBins);
+   hist->GetXaxis()->SetTitle(xTitle.c_str());
+   hist->GetYaxis()->SetTitle("# Events");
+   return hist;
+}
+/*TH1F *newHisto(string name, string title, string xTitle, int nBins, double xLow, double xUp ){
+   TH1F* hist = new TH1F(name.c_str(), title.c_str(), nBins, xLow, xUp);
+   hist->GetXaxis()->SetTitle(xTitle.c_str());
+   hist->GetYaxis()->SetTitle("# Events");
+   //hist->GetXaxis()->SetLabelFont(63); //font in pixels
+   //hist->GetXaxis()->SetLabelSize(16); //in pixels
+   //hist->GetYaxis()->SetLabelFont(63); //font in pixels
+   //hist->GetYaxis()->SetLabelSize(16); //in pixels
+
+   hist->SetOption("HIST");
+   return hist;
+}*/
+
+TH1D *newHisto(string name, string title, string xTitle, int nBins, double xLow, double xUp ){
+   TH1D* hist = new TH1D(name.c_str(), title.c_str(), nBins, xLow, xUp);
+   hist->GetXaxis()->SetTitle(xTitle.c_str());
+   hist->GetYaxis()->SetTitle("# Events");
+   //hist->GetXaxis()->SetLabelFont(63); //font in pixels
+   //hist->GetXaxis()->SetLabelSize(16); //in pixels
+   //hist->GetYaxis()->SetLabelFont(63); //font in pixels
+   //hist->GetYaxis()->SetLabelSize(16); //in pixels
+
+   hist->SetOption("HIST");
+   return hist;
+}
+
+
+
+double phi0to2pi(double phi){
+   double pi = 3.141592653589793238;
+   while (phi >= 2.*pi) phi -= 2.*pi;
+   while (phi < 0.) phi += 2.*pi;
+   return phi;
+}
+
+double deltaPhi(TLorentzVector v1, TLorentzVector v2){
+   // build the delta Phi angle between the two vectors
+   double pi = 3.141592653589793238;
+   double phi1 = phi0to2pi(v1.Phi());
+   double phi2 = phi0to2pi(v2.Phi());
+   double dPhi = phi0to2pi(phi1 - phi2);
+   dPhi = (dPhi > (2*pi - dPhi)) ? 2*pi - dPhi : dPhi;
+   return dPhi;
+} 
+
+double deltaPhi(double Phi1, double Phi2){
+   // build the delta Phi angle between the two vectors
+   double pi = 3.141592653589793238;
+   double phi1 = phi0to2pi(Phi1);
+   double phi2 = phi0to2pi(Phi2);
+   double dPhi = phi0to2pi(phi1 - phi2);
+   dPhi = (dPhi > (2*pi - dPhi)) ? 2*pi - dPhi : dPhi;
+   //cout << "      DeltaPhi: " << endl;
+   //cout << "      phi1 = " << phi1 << "  phi2 = " << phi2 << endl;
+   //cout << "      DeltaPhi = " << dPhi << endl;
+   return dPhi;
+} 
+
+double deltaR(TLorentzVector v1, TLorentzVector v2){
+   double dEta = v1.Eta() - v2.Eta();
+   double dPhi = deltaPhi(v1, v2);
+   return sqrt(dEta * dEta + dPhi * dPhi);
+}
+
+double deltaR(double Phi1, double Eta1, double Phi2, double Eta2){
+   //cout << "DeltaR:" << endl;
+   //cout << "phi1 = " << Phi1 << "  eta1 = " << Eta1 << "  phi2 = " << Phi2 << "  eta2 = " << Eta2 << endl; 
+   double dEta = Eta1 - Eta2;
+   double dPhi = deltaPhi(Phi1, Phi2);
+   //cout << "   deltaR = " << sqrt(dEta * dEta + dPhi * dPhi) << endl;
+   return sqrt(dEta * dEta + dPhi * dPhi);
+}
+
+double PHI(TLorentzVector l1, TLorentzVector l2, TLorentzVector j1, TLorentzVector j2){
+   // build the angle PHI between the two subsytems (l1+l2, j1+j2) vectors 
+   double lPx = (l1.Px() + l2.Px());
+   double lPy = (l1.Py() + l2.Py());
+   double lPz = (l1.Pz() + l2.Pz());
+   double lNorm = sqrt(lPx * lPx + lPy * lPy + lPz * lPz);
+   double jPx = (j1.Px() + j2.Px());
+   double jPy = (j1.Py() + j2.Py());
+   double jPz = (j1.Pz() + j2.Pz());
+   double jNorm = sqrt(jPx * jPx + jPy * jPy + jPz * jPz);
+   return acos((jPx * lPx + jPy * lPy + jPz * lPz) / (jNorm * lNorm));
+}
+
+double PHI_T(TLorentzVector l1, TLorentzVector l2, TLorentzVector j1, TLorentzVector j2){
+   // build the angle PHI between the two subsytems (l1+l2, j1+j2) vectors in the transverse plane
+   double lPx = (l1.Px() + l2.Px());
+   double lPy = (l1.Py() + l2.Py());
+   double lNorm = sqrt(lPx * lPx + lPy * lPy);
+   double jPx = (j1.Px() + j2.Px());
+   double jPy = (j1.Py() + j2.Py());
+   double jNorm = sqrt(jPx * jPx + jPy * jPy);
+   return acos((jPx * lPx + jPy * lPy) / (jNorm * lNorm));
+}
+
+double SpTsub(TLorentzVector v1, TLorentzVector v2){
+   return sqrt(pow(v1.Px() + v2.Px(), 2) + pow(v1.Py() + v2.Py(), 2)) / (v1.Pt() + v2.Pt());
+}
+
+double SpT(TLorentzVector l1, TLorentzVector l2, TLorentzVector j1, TLorentzVector j2){
+   return sqrt( pow(SpTsub(l1, l2), 2) + pow(SpTsub(j1, j2), 2)  ) / sqrt(2.);
+} 
+
+double SPhi(TLorentzVector l1, TLorentzVector l2, TLorentzVector j1, TLorentzVector j2){
+   return sqrt(deltaPhi(l1, l2) * deltaPhi(l1, l2) + deltaPhi(j1, j2) * deltaPhi(j1, j2)) / sqrt(2.);
+}
+
+class table{
+   public:
+      table(){};
+      class record{
+	 public:
+	    double ptLow, ptHi, etaLow, etaHi, effi;
+	    record(): ptLow(0), ptHi(0), etaLow(0), etaHi(0), effi(0){}
+	    record(double pt1, double pt2, double eta1, double eta2, double eff):
+	       ptLow(pt1), ptHi(pt2), etaLow(eta1), etaHi(eta2), effi(eff){}
+	    bool belongTo(double pt, double eta){
+	       return (pt < ptHi && pt >= ptLow) && (eta < etaHi && eta >= etaLow);
+	    }
+      };
+      table(std::string filename)
+      {
+	 std::ifstream file(filename.c_str());
+         cout << filename << endl;
+         if (file) cout << "OK" << endl;
+         else cout << "Not OK" << endl;
+	 double  pt1, pt2, eta1, eta2, effi;
+	 while( file >> eta1 >> eta2 >> pt1 >> pt2 >> effi){
+            //cout << eta1 << "  " << eta2 << "  " << pt1 << "  " << pt2 << endl;
+	    recd.push_back(record(pt1, pt2, eta1, eta2, effi));
+            //cout << "ef " << effi << endl;
+	 }
+      }
+      double getEfficiency(double pt, double eta){
+	 double hiPtBin= 0;
+	 for (unsigned int i=0; i != recd.size(); i++) {
+	    if((recd[i]).belongTo(pt, eta)) return recd[i].effi;
+	    if((recd[i]).belongTo(190, eta)) hiPtBin = recd[i].effi;
+	 }
+	 return hiPtBin;
+      }
+   private:
+      std::vector<record> recd;
+};
+
+double SmearJetPt(double recoPt, double genPt, double eta){
+   // summer 2011 resolution scale factor
+   // twiki.cern.ch/twiki/bin/view/CMS/JetResolution
+   double resSF = 1.0000001;
+   if      (fabs(eta) < 0.5) resSF = 1.052;
+   else if (fabs(eta) < 1.1) resSF = 1.057;
+   else if (fabs(eta) < 1.7) resSF = 1.096;
+   else if (fabs(eta) < 2.3) resSF = 1.134;
+   else if (fabs(eta) < 5.0) resSF = 1.288;
+   
+   // intrinsec MC resolution
+   // twiki.cern.ch/twiki/bin/view/CMS/JetResolution
+   double sigMC = 1.000001;
+   if      (fabs(eta) < 1.1) sigMC = 1.066;
+   else if (fabs(eta) < 1.7) sigMC = 1.191;
+   else if (fabs(eta) < 2.3) sigMC = 1.096;
+   else if (fabs(eta) < 5.0) sigMC = 1.166;
+
+
+   double smearedPt = (genPt + resSF*(recoPt - genPt)) > 0 ? genPt + resSF*(recoPt - genPt) : 0;
+
+   return smearedPt;
+  
+}
+
+void normalizeTH2D(TH2D *h)
+{
+   int xbin(h->GetNbinsX()), ybin(h->GetNbinsY());
+   for (int i(1); i <= ybin; i++){
+      double sum(0.);
+      for (int j(1); j <= xbin; j++){
+         sum += h->GetBinContent(j,i);
+      }
+      for (int j(1); j <= xbin; j++){
+         if (sum > 0) h->SetBinContent(j, i, h->GetBinContent(j, i) / sum );
+      }
+   }
+}
+
+
+void bestTwoJetsCandidatesPt(vector<jetStruct> jets, pair<TLorentzVector, TLorentzVector>& bestTwoJets)
+{
+   int nGoodJets(jets.size());
+   if (nGoodJets >= 2){
+      //cout << "\nMore than 2 jets, selecting best pair" << endl;
+      double minPt(999999.);
+      for (int i(0); i < nGoodJets - 1; i++) {
+	 TLorentzVector jeti; jeti.SetPtEtaPhiE(jets[i].pt, jets[i].eta, jets[i].phi, jets[i].energy);
+	 for (int j(i + 1); j < nGoodJets; j++) {
+	    TLorentzVector jetj; jetj.SetPtEtaPhiE(jets[j].pt, jets[j].eta, jets[j].phi, jets[j].energy);
+	    TLorentzVector jetij = jeti + jetj;
+	    //cout << i << " " << j << ": Pair pt = " << jetij.Pt() << endl;
+	    if (jetij.Pt() < minPt){
+	       bestTwoJets.first = jeti; 
+	       bestTwoJets.second = jetj;
+	       minPt = jetij.Pt();
+	       //cout << "Smallest pt = " << jetij.Pt() << endl;
+	    }
+	 }
+      } 
+   }
+}
+
+void bestTwoJetsCandidatesPhi(vector<jetStruct> jets, pair<TLorentzVector, TLorentzVector>& bestTwoJets)
+{
+   int nGoodJets(jets.size());
+   if (nGoodJets >= 2){
+      //cout << "\nMore than 2 jets, selecting best pair" << endl;
+      double maxdPhi(-0.0001);
+      for (int i(0); i < nGoodJets - 1; i++) {
+	 TLorentzVector jeti; jeti.SetPtEtaPhiE(jets[i].pt, jets[i].eta, jets[i].phi, jets[i].energy);
+	 for (int j(i + 1); j < nGoodJets; j++) {
+	    TLorentzVector jetj; jetj.SetPtEtaPhiE(jets[j].pt, jets[j].eta, jets[j].phi, jets[j].energy);
+            double dPhi = deltaPhi(jeti, jetj);
+	    //cout << i << " " << j << ": dPhi = " << dPhi << endl;
+	    if (dPhi > maxdPhi){
+	       bestTwoJets.first = jeti; 
+	       bestTwoJets.second = jetj;
+	       maxdPhi = dPhi;
+	       //cout << "Biggest dPhi = " << dPhi << endl;
+	    }
+	 }
+      } 
+   }
+}

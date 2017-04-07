@@ -1,0 +1,3 @@
+/store/group/phys_smp/AnalysisFramework/Baobab/Apichart/Bonzai/13TeV_25ns/MC/v16.1/Ntuples/CRAB_PrivateMC/crab_WWTo2L2Nu_13TeV-powheg-VJetPruner-SMu/160812_145754/0000/Bonzai-WWTo2L2Nu_13TeV-powheg-VJetPruner-SMu_1.root
+
+

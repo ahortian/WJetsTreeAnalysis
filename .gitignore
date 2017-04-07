@@ -1,0 +1,15 @@
+*.[oa]
+*~
+WJets/HistoFiles/*.root
+WJets/PNGFiles/*
+WJets/Sources/.__*
+WJets/RooUnfold/libRooUnfold.rootmap
+WJets/RooUnfold/tmp
+WJets/RooUnfold/tmp/linuxx8664gcc/Roo*
+
+*.so
+*.d
+*.log
+*.swp
+*.DS_Store
+

@@ -1,0 +1,150 @@
+#ifndef __getFilesAndhistograms__
+#define __getFilesAndhistograms__
+
+#include <RooUnfoldResponse.h>
+
+string getEnergy()
+{
+   string energy = "";
+   ostringstream fileBeingProcessed; fileBeingProcessed << __FILE__;
+   if (fileBeingProcessed.str().find("Analysis2012") != string::npos) {
+      cout << "This is 2012 !" << endl;
+      energy = "8TeV";
+   }
+   else if (fileBeingProcessed.str().find("Analysis2011") != string::npos) {
+      cout << "This is 2011 !" << endl;
+      energy = "7TeV";
+   }
+   else 
+   {
+      cout << "WARNING ! Impossible to retrieve te energy form the current location !" << endl;
+   }
+   fileBeingProcessed.str("");
+
+   return energy;
+}
+
+TFile* getFile(string histoFilesDirectory, string leptonFlavor, string energy, string Name, int JetPtMin = 20, int JetPtMax = 0, bool doFlat = false, bool doVarWidth = false, string closureTest = "", string syst = "0", bool dodR = false)
+{
+   if (leptonFlavor == "Muons" || leptonFlavor == "DMu_") leptonFlavor = "DMu";
+   else if (leptonFlavor == "Electrons" || leptonFlavor == "DE_") leptonFlavor = "DE";
+
+   ostringstream JetPtMinStr;  JetPtMinStr << JetPtMin;
+   ostringstream JetPtMaxStr;  JetPtMaxStr << JetPtMax;
+
+   string effiCorr = "0", trigCorr = "0";
+   if (Name.find("Data") == 0) effiCorr = "1";
+   if (Name.find("Data") == 0 || energy == "8TeV") trigCorr = "1";
+   if (Name.find("HepMC") !=  string::npos ||  Name.find("UNF")  !=  string::npos )  trigCorr = "1";
+
+   string fileName = histoFilesDirectory + leptonFlavor + "_" + energy + "_" + Name;
+   fileName += "_EffiCorr_" + effiCorr + "_TrigCorr_" + trigCorr + "_Syst_" + syst + "_JetPtMin_" + JetPtMinStr.str();
+   if (JetPtMax != 0 && JetPtMax > JetPtMin) fileName += "_JetPtMax_" + JetPtMaxStr.str();
+   if (doFlat && Name.find("Data") == string::npos) fileName += "_Flat";
+   fileName += closureTest;
+   if (doVarWidth )  fileName += "_VarWidth";
+   if ( dodR ) fileName += "_dR5";
+   fileName += "_22.root";
+
+   TFile *File; 
+   File = new TFile(fileName.c_str(), "READ");
+   cout << "Opening: " << fileName << "   --->   Opened ? " << File->IsOpen() << endl;
+   return File; 
+}
+
+void getFiles(string histoFilesDirectory, TFile *Files[], string leptonFlavor, string energy, string Name, int JetPtMin = 20, int JetPtMax = 0, bool doFlat = false ,  bool doVarWidth = false )
+{
+   if (leptonFlavor == "Muons" || leptonFlavor == "DMu_") leptonFlavor = "DMu";
+   else if (leptonFlavor == "Electrons" || leptonFlavor == "DE_") leptonFlavor = "DE";
+
+   vector<string> Syst;
+   if (Name.find("Data") != string::npos){ 
+      Syst.push_back("0");
+      Syst.push_back("2_Up");
+      Syst.push_back("2_Down");
+   }
+   else if (Name.find("UNFOLDING") != string::npos){
+      Syst.push_back("0");
+      Syst.push_back("1_Up");
+      Syst.push_back("1_Down");
+      Syst.push_back("4_Up");
+   }
+   else {
+      Syst.push_back("0");
+      Syst.push_back("1_Up");
+      Syst.push_back("1_Down");
+      Syst.push_back("3_Up");
+      Syst.push_back("3_Down");
+   };
+
+   int nSyst(Syst.size());
+
+   for (int i(0); i < nSyst; i++) {
+      Files[i] = getFile(histoFilesDirectory, leptonFlavor, energy, Name, JetPtMin, JetPtMax, doFlat, doVarWidth , "", Syst[i]);
+   }
+
+}
+
+void closeFile(TFile *File){
+   if (File->IsOpen()) File->Close();
+   cout << "Closing file: " << File->GetName() << "   --->   Closed ? " << (!(File->IsOpen())) << endl;
+}
+
+void closeFiles(TFile *Files[])
+{
+   string fileName = Files[0]->GetName();
+   int nFiles;
+   if (fileName.find("Data") != string::npos) nFiles = 3; 
+   else if (fileName.find("UNFOLDING") != string::npos) nFiles = 4; 
+   else nFiles = 5;
+
+   for (int i(0); i < nFiles; i++){
+      closeFile(Files[i]);
+   }
+}
+
+TH1D* getHisto(TFile *File, string variable)
+{
+   TH1D *histo = (TH1D*) File->Get(variable.c_str());
+   return histo;
+}
+
+void getHistos(TH1D *histograms[], TFile *Files[], string variable)
+{
+   string fileName = Files[0]->GetName();
+   int nFiles;
+   if (fileName.find("Data") != string::npos) nFiles = 3; 
+   else if (fileName.find("UNFOLDING") != string::npos) nFiles = 4; 
+   else nFiles = 5;
+
+   for (int i(0); i < nFiles; i++){
+      histograms[i] = (TH1D*) Files[i]->Get(variable.c_str());
+   } 
+}
+
+void getResp(RooUnfoldResponse *response, TFile *File, string variable)
+{
+   response = (RooUnfoldResponse*) File->Get(variable.c_str());
+}
+
+RooUnfoldResponse* getResp(TFile *File, string variable)
+{
+   RooUnfoldResponse *response = (RooUnfoldResponse*) File->Get(variable.c_str());
+   return response;
+}
+
+void getResps(RooUnfoldResponse *responses[], TFile *Files[], string variable)
+{
+   string fileName = Files[0]->GetName();
+   int nFiles;
+   if (fileName.find("Data") != string::npos) nFiles = 3; 
+   else if (fileName.find("UNFOLDING") != string::npos) nFiles = 4; 
+   else nFiles = 5;
+
+   for (int i(0); i < nFiles; i++){
+      responses[i] = (RooUnfoldResponse*) Files[i]->Get(variable.c_str());
+   } 
+}
+
+#endif
+

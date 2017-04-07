@@ -1,0 +1,52 @@
+The instructions for running the W+jets analysis code on baobab data and MC ntuples produced at 13 TeV.
+Kadir Ocalan (29.10.2015)
+
+-- For now use CMSSW_5_3_11, migrating to CMSSW 75X
+cmsrel CMSSW_5_3_11  
+cd CMSSW_5_3_111/src
+cmsenv 
+
+-- Clone shears from the gitlab (can be found here https://gitlab.cern.ch/shears/shears/tree/master)
+git clone ssh://git@gitlab.cern.ch:7999/shears/shears.git
+
+-- Go to the directory 
+cd shears/WJets
+
+-- Compile RooUnfold
+cd RooUnfold
+make clean
+make
+cd -
+
+-- Make LHAPDF work with quick hacks
+sed -i 's#/user/aleonard/LHAPDF/lib/libLHAPDF.so#/afs/cern.ch/cms/slc5_amd64_gcc434/external/lhapdf/5.8.5/lib/libLHAPDF.so#g' runDYJets.cc
+sed -i 's#/user/aleonard/lhapdf-5.9.1/include/#/afs/cern.ch/cms/slc5_amd64_gcc434/external/lhapdf/5.8.5/include/#g' rootlogon.C
+sed -i 's#NNPDF23_nlo_as_0118#NNPDF20_as_0118_100#g' ComputePDFUncertainties.cc
+sed -i 's#NNPDF23_nlo_as_0118#NNPDF20_as_0118_100#g' runDYJets.cc
+
+-- Can use 13 TeV v10 Baobab data and MC 25ns samples that are merged from here /eos/cms/store/group/phys_smp/AnalysisFramework/Baobab/
+mkdir DataW
+mkdir ~/eos
+eosmount ~/eos
+ln -s  ~/eos/cms/store/user/ocalan/13TeV_25ns   DataW
+
+-- Ready to run the code!!!Before running it, change doQCD to 0 (int doQCD=0) in WJets/runDYJets.cc.
+
+-- Run the code under /WJets
+root -b runDYJets.cc  
+
+-- For QCD Background go to WJets/runDYJets.cc change int doQCD = 1
+root -b -q runDYJets.cc
+# Change it 1-3 and run every time. 
+
+-- Output root files are available in the directory HistoFiles.
+-- Merge single top and DYJets root files:
+root -b -q MergeTop_BVeto.cc++
+
+-- Merge QCD Background:
+root -b -q runQCD_BVeto.cc++
+
+-- Plotting:
+root -b -q runTest_BVeto.cc
+
+--Congratulations! Output PDF files will be in the directory PNGFiles

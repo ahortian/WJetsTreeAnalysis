@@ -1,0 +1,7 @@
+/store/user/ahortian/AnalysisFramework/Bonzai/13TeV_25ns/MC/v13.1/Ntuples/CRAB_PrivateMC/crab_TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8-VJetPruner-SMu/160306_045143/0000/Bonzai-TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8-VJetPruner-SMu_1.root
+/store/user/ahortian/AnalysisFramework/Bonzai/13TeV_25ns/MC/v13.1/Ntuples/CRAB_PrivateMC/crab_TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8-VJetPruner-SMu/160306_045143/0000/Bonzai-TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8-VJetPruner-SMu_2.root
+/store/user/ahortian/AnalysisFramework/Bonzai/13TeV_25ns/MC/v13.1/Ntuples/CRAB_PrivateMC/crab_TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8-VJetPruner-SMu/160306_045143/0000/Bonzai-TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8-VJetPruner-SMu_3.root
+/store/user/ahortian/AnalysisFramework/Bonzai/13TeV_25ns/MC/v13.1/Ntuples/CRAB_PrivateMC/crab_TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8-VJetPruner-SMu/160306_045143/0000/Bonzai-TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8-VJetPruner-SMu_4.root
+/store/user/ahortian/AnalysisFramework/Bonzai/13TeV_25ns/MC/v13.1/Ntuples/CRAB_PrivateMC/crab_TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8-VJetPruner-SMu/160306_045143/0000/Bonzai-TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8-VJetPruner-SMu_5.root
+
+
