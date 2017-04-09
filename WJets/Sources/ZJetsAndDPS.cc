@@ -273,8 +273,8 @@ void ZJetsAndDPS::Loop(bool hasRecoInfo, bool hasGenInfo, int doQCD, bool doSSig
 
     cout << " run on " << nentries << " events" << endl;
     //--- Begin Loop All Entries --
-    //for (Long64_t jentry(0); jentry < nentries; jentry++){
-    for (Long64_t jentry(0); jentry < 500000; jentry++){
+    for (Long64_t jentry(0); jentry < nentries; jentry++){
+    //for (Long64_t jentry(0); jentry < 500000; jentry++){
         Long64_t ientry = LoadTree(jentry);
         if (ientry < 0) break;
 
