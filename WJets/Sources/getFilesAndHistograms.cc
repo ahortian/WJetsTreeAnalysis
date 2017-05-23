@@ -17,9 +17,14 @@ string getEnergy()
 {
     string energy = "";
     ostringstream fileBeingProcessed; fileBeingProcessed << __FILE__;
-    if (fileBeingProcessed.str().find("Analysis2012") != string::npos) {
-        energy = "13TeV";
-    }
+   //andrew
+   // if (fileBeingProcessed.str().find("Analysis2012") != string::npos) {
+   //     energy = "13TeV";
+   // }
+   //change directory to "WJets" because this is how Apichart's repo is set up
+   if (fileBeingProcessed.str().find("WJets") != string::npos) {
+         energy = "13TeV";
+     }
     else if (fileBeingProcessed.str().find("Analysis2011") != string::npos) {
         energy = "7TeV";
     }

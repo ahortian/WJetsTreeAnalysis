@@ -95,6 +95,27 @@ public:
     TH1D *SixthJetPt_Zinc6jet;
     TH1D *SixthJetPt_1_Zinc6jet;
     TH1D *SixthJetPt_2_Zinc6jet;
+  
+    //andrew
+    TH1D *LeadingJetPt_Zinc1jet_R21;
+    TH1D *LeadingJetPt_Zinc2jet_R21;
+    TH1D *LeadingJetPt_Zinc2jet_R32;
+    TH1D *LeadingJetPt_Zinc3jet_R32;
+    TH1D *LeadingJetPt_Zinc3jet_R43;
+    TH1D *LeadingJetPt_Zinc4jet_R43;
+    TH1D *IncJetRatiosPt_Z_R21;
+    TH1D *IncJetRatiosPt_Z_R32;
+    TH1D *IncJetRatiosPt_Z_R43;
+
+    TH1D *LeadingJetPt_Zexc1jet_R21;
+    TH1D *LeadingJetPt_Zexc2jet_R21;
+    TH1D *LeadingJetPt_Zexc2jet_R32;
+    TH1D *LeadingJetPt_Zexc3jet_R32;
+    TH1D *LeadingJetPt_Zexc3jet_R43;
+    TH1D *LeadingJetPt_Zexc4jet_R43;
+    TH1D *ExcJetRatiosPt_Zexc_R21;
+    TH1D *ExcJetRatiosPt_Zexc_R32;
+    TH1D *ExcJetRatiosPt_Zexc_R43;
 
     TH1D *genFirstJetPt_Zinc1jet;
     TH1D *genFirstJetPt_1_Zinc1jet;
@@ -114,6 +135,27 @@ public:
     TH1D *genSixthJetPt_Zinc6jet;
     TH1D *genSixthJetPt_1_Zinc6jet;
     TH1D *genSixthJetPt_2_Zinc6jet;
+
+    //andrew -- 5/19/17
+    TH1D *genLeadingJetPt_Zinc1jet_R21;
+    TH1D *genLeadingJetPt_Zinc2jet_R21;
+    TH1D *genLeadingJetPt_Zinc2jet_R32;
+    TH1D *genLeadingJetPt_Zinc3jet_R32;
+    TH1D *genLeadingJetPt_Zinc3jet_R43;
+    TH1D *genLeadingJetPt_Zinc4jet_R43;
+    TH1D *genIncJetRatiosPt_Z_R21;
+    TH1D *genIncJetRatiosPt_Z_R32;
+    TH1D *genIncJetRatiosPt_Z_R43;
+    
+    TH1D *genLeadingJetPt_Zexc1jet_R21;
+    TH1D *genLeadingJetPt_Zexc2jet_R21;
+    TH1D *genLeadingJetPt_Zexc2jet_R32;
+    TH1D *genLeadingJetPt_Zexc3jet_R32;
+    TH1D *genLeadingJetPt_Zexc3jet_R43;
+    TH1D *genLeadingJetPt_Zexc4jet_R43;
+    TH1D *genExcJetRatiosPt_Zexc_R21;
+    TH1D *genExcJetRatiosPt_Zexc_R32;
+    TH1D *genExcJetRatiosPt_Zexc_R43;
 
     TH2D *hresponseFirstJetPt_Zinc1jet;
     TH2D *hresponseFirstJetPt_1_Zinc1jet;
@@ -209,6 +251,41 @@ public:
     TH2D *hresponseJetsHT_2_Zinc4jet;
     TH2D *hresponseJetsHT_2_Zinc5jet;
     TH2D *hresponseJetsHT_2_Zinc6jet;
+
+    //andrew
+    //--- Jet HT/2
+    //TH1D *HTover2_Zinc2jet;
+    //TH1D *HTover2_Zinc3jet;
+    //TH1D *HTover2_Zinc4jet;
+
+    TH1D *HTover2_Zinc2jet_R32;
+    TH1D *HTover2_Zinc3jet_R32;
+    TH1D *HTover2_Zinc3jet_R43;
+    TH1D *HTover2_Zinc4jet_R43;
+    TH1D *IncJetRatiosHTover2_Z_R32;
+    TH1D *IncJetRatiosHTover2_Z_R43;
+    
+    TH1D *HTover2_Zexc2jet_R32;
+    TH1D *HTover2_Zexc3jet_R32;
+    TH1D *HTover2_Zexc3jet_R43;
+    TH1D *HTover2_Zexc4jet_R43;
+    TH1D *ExcJetRatiosHTover2_Zexc_R32;
+    TH1D *ExcJetRatiosHTover2_Zexc_R43;
+
+    TH1D *genHTover2_Zinc2jet_R32;
+    TH1D *genHTover2_Zinc3jet_R32;
+    TH1D *genHTover2_Zinc3jet_R43;
+    TH1D *genHTover2_Zinc4jet_R43;
+    TH1D *genIncJetRatiosHTover2_Z_R32;
+    TH1D *genIncJetRatiosHTover2_Z_R43;
+    
+    TH1D *genHTover2_Zexc2jet_R32;
+    TH1D *genHTover2_Zexc3jet_R32;
+    TH1D *genHTover2_Zexc3jet_R43;
+    TH1D *genHTover2_Zexc4jet_R43;
+    TH1D *genExcJetRatiosHTover2_Zexc_R32;
+    TH1D *genExcJetRatiosHTover2_Zexc_R43;
+
 
     //--- Jet eta
     TH1D *FirstJetEta_Zinc1jet;

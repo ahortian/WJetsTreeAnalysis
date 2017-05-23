@@ -273,8 +273,9 @@ void ZJetsAndDPS::Loop(bool hasRecoInfo, bool hasGenInfo, int doQCD, bool doSSig
 
     cout << " run on " << nentries << " events" << endl;
     //--- Begin Loop All Entries --
-    for (Long64_t jentry(0); jentry < nentries; jentry++){
-    //for (Long64_t jentry(0); jentry < 500000; jentry++){
+    //for (Long64_t jentry(0); jentry < nentries; jentry++){
+    for (Long64_t jentry(0); jentry < 500000; jentry++){
+    //for (Long64_t jentry(0); jentry < 2000000; jentry++){    
         Long64_t ientry = LoadTree(jentry);
         if (ientry < 0) break;
 
@@ -1924,6 +1925,10 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                     //*************************************** end edit ***************************************************************//
                     genFirstJetPtEta_Zinc1jet->Fill(genLeadJ.Pt(), fabs(genLeadJ.Eta()), genWeight);
                     genFirstHighestJetPt_Zinc1jet->Fill(genLeadJ.Pt(), genWeight);
+                    
+                    //andrew
+                    genLeadingJetPt_Zinc1jet_R21->Fill(genJets[0].pt, genWeight);
+
                     genJetsHT_Zinc1jet->Fill(genJetsHT, genWeight);
                     genJetsHT_20_30_Zinc1jet->Fill(genJetsHT_20, genWeight);
                     genJetsHT_1_Zinc1jet->Fill(genJetsHT, genWeight);
@@ -1942,6 +1947,9 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                         //    gendEtaBosonJet_Zexc1jet->Fill(fabs(genLeadJ.Eta()), genWeight);
                         if ( doW ) gendEtaBosonJet_Zexc1jet->Fill(fabs(genLeadJ.Eta() - genLep1.Eta()), genWeight);
                         else gendEtaBosonJet_Zexc1jet->Fill(fabs(genLeadJ.Eta()-genZ.Eta()), genWeight);
+   
+                        //andrew
+                        genLeadingJetPt_Zexc1jet_R21->Fill(genJets[0].pt, genWeight);
 
                     }
                 }
@@ -1967,6 +1975,12 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                     genSecondHighestJetPt_Zinc2jet->Fill(genSecondJ.Pt(), genWeight);
                     
                     
+                    //andrew
+                    genLeadingJetPt_Zinc2jet_R21->Fill(genJets[0].pt, genWeight);
+                    genLeadingJetPt_Zinc2jet_R32->Fill(genJets[0].pt, genWeight);
+                    genIncJetRatiosPt_Z_R21->Divide(genLeadingJetPt_Zinc2jet_R21, genLeadingJetPt_Zinc1jet_R21, 1, 1, "B");
+                    genHTover2_Zinc2jet_R32->Fill((genJets[0].pt + genJets[1].pt)/2. , genWeight);
+
                     genSecondJetEta_Zinc2jet->Fill(fabs(genSecondJ.Eta()), genWeight);
                     genSecondJetEta_2_Zinc2jet->Fill(fabs(genSecondJ.Eta()), genWeight);
                     //*************************************** begin edit *******************************************************//
@@ -2167,6 +2181,12 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                         genSPhi_Zexc2jet->Fill(SPhi(genLep1, genLep2, genLeadJ, genSecondJ), genWeight);
                         genptBal_Zexc2jet->Fill(genJet1Plus2PlusZ.Pt(), genWeight);
 
+                        //andrew
+                        genLeadingJetPt_Zexc2jet_R21->Fill(genJets[0].pt, genWeight);
+                        genLeadingJetPt_Zexc2jet_R32->Fill(genJets[0].pt, genWeight);
+                        genExcJetRatiosPt_Zexc_R21->Divide(genLeadingJetPt_Zexc2jet_R21, genLeadingJetPt_Zexc1jet_R21, 1, 1);
+                        genHTover2_Zexc2jet_R32->Fill((genJets[0].pt + genJets[1].pt)/2. , genWeight);
+
                         if (genZ.Pt() < 25){
                             genptBal_LowPt_Zexc2jet->Fill(genJet1Plus2PlusZ.Pt(), genWeight);
                             gendPhiJets_LowPt_Zexc2jet->Fill(deltaPhi(genLeadJ, genSecondJ), genWeight);
@@ -2244,6 +2264,13 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                     genZRapidity_Zinc3jet->Fill(genZ.Rapidity(), genWeight);
                     genZEta_Zinc3jet->Fill(genZ.Eta(), genWeight);
                     
+                    //andrew
+                    genLeadingJetPt_Zinc3jet_R32->Fill(genJets[0].pt, genWeight);
+                    genLeadingJetPt_Zinc3jet_R43->Fill(genJets[0].pt, genWeight);
+                    genIncJetRatiosPt_Z_R32->Divide(genLeadingJetPt_Zinc3jet_R32,genLeadingJetPt_Zinc2jet_R32, 1, 1, "B");
+                    genHTover2_Zinc3jet_R32->Fill((genJets[0].pt + genJets[1].pt)/2. , genWeight);
+                    genHTover2_Zinc3jet_R43->Fill((genJets[0].pt + genJets[1].pt)/2. , genWeight);
+                    genIncJetRatiosHTover2_Z_R32->Divide(genHTover2_Zinc3jet_R32,genHTover2_Zinc2jet_R32,1,1,"B");
                     
                     genThirdJetEta_Zinc3jet->Fill(fabs(genJets[2].eta), genWeight);
                     genThirdJetEta_2_Zinc3jet->Fill(fabs(genJets[2].eta), genWeight);
@@ -2282,6 +2309,16 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                     genJetsHT_1_Zinc3jet->Fill(genJetsHT, genWeight);
                     genJetsHT_2_Zinc3jet->Fill(genJetsHT, genWeight);
                     
+                    //andrew
+                    if (nGoodGenJets == 3){
+                        genLeadingJetPt_Zexc3jet_R32->Fill(genJets[0].pt, genWeight);
+                        genLeadingJetPt_Zexc3jet_R43->Fill(genJets[0].pt, genWeight);
+                        genExcJetRatiosPt_Zexc_R32->Divide(genLeadingJetPt_Zexc3jet_R32, genLeadingJetPt_Zexc2jet_R32, 1, 1);
+                        genHTover2_Zexc3jet_R32->Fill((genJets[0].pt + genJets[1].pt)/2. , genWeight);
+                        genHTover2_Zexc3jet_R43->Fill((genJets[0].pt + genJets[1].pt)/2. , genWeight);
+                        genExcJetRatiosHTover2_Zexc_R32->Divide(genHTover2_Zexc3jet_R32, genHTover2_Zexc2jet_R32, 1, 1);
+                    }
+
                 }
                 if (nGoodGenJets >= 4){
                     genZNGoodJets_Zinc->Fill(4., genWeight);
@@ -2316,9 +2353,25 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                     genFirstHighestJetPt_Zinc4jet->Fill(genJets[0].pt, genWeight);
                     genSecondHighestJetPt_Zinc4jet->Fill(genJets[1].pt, genWeight);
                     genThirdHighestJetPt_Zinc4jet->Fill(genJets[2].pt, genWeight);
+                   
+                    //andrew
+                    genLeadingJetPt_Zinc4jet_R43->Fill(genJets[0].pt, genWeight);
+                    genIncJetRatiosPt_Z_R43->Divide(genLeadingJetPt_Zinc4jet_R43, genLeadingJetPt_Zinc3jet_R43, 1, 1, "B");
+                    genHTover2_Zinc4jet_R43->Fill((genJets[0].pt + genJets[1].pt)/2. , genWeight);
+                    genIncJetRatiosHTover2_Z_R43->Divide(genHTover2_Zinc4jet_R43, genHTover2_Zinc3jet_R43, 1, 1, "B");
+
                     genJetsHT_Zinc4jet->Fill(genJetsHT, genWeight);
                     genJetsHT_1_Zinc4jet->Fill(genJetsHT, genWeight);
                     genJetsHT_2_Zinc4jet->Fill(genJetsHT, genWeight);
+
+                    //andrew
+                    if (nGoodGenJets == 4){
+                        genLeadingJetPt_Zexc4jet_R43->Fill(genJets[0].pt, genWeight);
+                        genExcJetRatiosPt_Zexc_R43->Divide(genLeadingJetPt_Zexc4jet_R43, genLeadingJetPt_Zexc3jet_R43, 1, 1);
+                        genHTover2_Zexc4jet_R43->Fill((genJets[0].pt + genJets[1].pt)/2. , genWeight);
+                        genExcJetRatiosHTover2_Zexc_R43->Divide(genHTover2_Zexc4jet_R43, genHTover2_Zexc3jet_R43, 1, 1);
+                    }
+
                 }
                 if (nGoodGenJets >= 5){
                     genZNGoodJets_Zinc->Fill(5., genWeight);
@@ -2574,7 +2627,10 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 for ( int i =0 ; i < NbinsEta2D - 1 ; i++){
                     if ( fabs(jets[0].eta) >= j_Y_range[i] &&  fabs(jets[0].eta) < j_Y_range[i+1] )                                                FirstJetPt_Zinc1jet_Eta[i]->Fill(fabs(jets[0].pt), weight);
                 }
-                
+
+                //andrew
+		LeadingJetPt_Zinc1jet_R21->Fill(jets[0].pt, weight);                
+
                 if (nGoodJets == 1){
                     // compute Delta pt between Z and jets
                     if (Z.Pt() > 0.8 * jetPtCutMin  && jets[0].pt/Z.Pt() < 1.2 && jets[0].pt/Z.Pt() > 0.8 && deltaPhi(leadJ, Z) > 2.7){
@@ -2594,6 +2650,10 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                         lepPt_Zexc1jet->Fill(lepton2.pt, weight);
                         lepEta_Zexc1jet->Fill(lepton2.eta, weight);
                     }
+                    
+                    //andrew
+                    LeadingJetPt_Zexc1jet_R21->Fill(jets[0].pt, weight);
+
                     dPhiLeptons_Zexc1jet->Fill(deltaPhi(lep1, lep2), weight);
                     dEtaLeptons_Zexc1jet->Fill(lepton1.eta - lepton2.eta, weight);
                     SpTLeptons_Zexc1jet->Fill(SpTsub(lep1, lep2), weight);
@@ -2606,6 +2666,7 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 }
             }
             if (nGoodJets >= 2){
+               
                 TLorentzVector jet1Plus2PlusZ = jet1Plus2 + Z;
                 ZNGoodJets_Zinc->Fill(2., weight);
                 ZNGoodJetsFull_Zinc->Fill(2., weight);
@@ -2702,6 +2763,13 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 BestSPhi_Zinc2jet->Fill(SPhi(lep1, lep2, bestTwoJets.first, bestTwoJets.second), weight);
                 
                 
+                //andrew
+		//HTover2_Zinc2jet->Fill((jets[0].pt + jets[1].pt)/2. , weight);
+                HTover2_Zinc2jet_R32->Fill((jets[0].pt + jets[1].pt)/2. , weight);
+                LeadingJetPt_Zinc2jet_R21->Fill(jets[0].pt, weight);
+                LeadingJetPt_Zinc2jet_R32->Fill(jets[0].pt, weight);
+                IncJetRatiosPt_Z_R21->Divide(LeadingJetPt_Zinc2jet_R21, LeadingJetPt_Zinc1jet_R21, 1, 1, "B");
+
                 for ( int i =0 ; i < NbinsEta2D - 1 ; i++){
                     if ( fabs(jets[1].eta) >= j_Y_range[i] &&  fabs(jets[1].eta) < j_Y_range[i+1]) SecondJetPt_Zinc2jet_Eta[i]->Fill(fabs(jets[0].pt), weight);
                 }
@@ -2967,6 +3035,12 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                     SecondJetPt_Zexc2jet->Fill(jets[1].pt, weight);
                     SecondJetEta_Zexc2jet->Fill(jets[1].eta, weight);
                     SecondJetPhi_Zexc2jet->Fill(jets[1].phi, weight);
+
+                    //andrew
+                    LeadingJetPt_Zexc2jet_R21->Fill(jets[0].pt, weight);
+                    LeadingJetPt_Zexc2jet_R32->Fill(jets[0].pt, weight);
+                    ExcJetRatiosPt_Zexc_R21->Divide(LeadingJetPt_Zexc2jet_R21,LeadingJetPt_Zexc1jet_R21, 1, 1);
+                    HTover2_Zexc2jet_R32->Fill((jets[0].pt + jets[1].pt)/2. , weight);
                     
                     //-- DPS Histograms
                     TwoJetsPtDiff_Zexc2jet->Fill(jet1Minus2.Pt(), weight);
@@ -3096,7 +3170,7 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 
                 diJetMass_Zinc3jet->Fill(jet1Plus2.M(), weight);
                 diJetMass_2_Zinc3jet->Fill(jet1Plus2.M(), weight);
-                
+               
                 diJetPt_Zinc3jet->Fill(jet1Plus2.Pt(), weight);
                 diJetPt_2_Zinc3jet->Fill(jet1Plus2.Pt(), weight);
 
@@ -3117,6 +3191,16 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                     AllJetEta_Zinc3jet->Fill(jets[j].eta, weight);
                     AllJetPhi_Zinc3jet->Fill(jets[j].phi, weight);
                 }
+  
+                //andrew
+		//HTover2_Zinc3jet->Fill((jets[0].pt + jets[1].pt)/2. , weight);
+                HTover2_Zinc3jet_R32->Fill((jets[0].pt + jets[1].pt)/2. , weight);
+                HTover2_Zinc3jet_R43->Fill((jets[0].pt + jets[1].pt)/2. , weight);
+                IncJetRatiosHTover2_Z_R32->Divide(HTover2_Zinc3jet_R32,HTover2_Zinc2jet_R32,1,1,"B");
+                LeadingJetPt_Zinc3jet_R32->Fill(jets[0].pt, weight);
+                LeadingJetPt_Zinc3jet_R43->Fill(jets[0].pt, weight);
+                IncJetRatiosPt_Z_R32->Divide(LeadingJetPt_Zinc3jet_R32, LeadingJetPt_Zinc2jet_R32, 1, 1, "B");
+
                 if (nGoodJets == 3){
                     nEventsExcl3Jets++;
                     ZNGoodJets_Zexc_NoWeight->Fill(3.);
@@ -3133,6 +3217,16 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                     dPhiLeptons_Zexc3jet->Fill(deltaPhi(lep1, lep2), weight);
                     dEtaLeptons_Zexc3jet->Fill(lepton1.eta - lepton2.eta, weight);
                     SpTLeptons_Zexc3jet->Fill(SpTsub(lep1, lep2), weight);
+  
+                    //andrew
+                    LeadingJetPt_Zexc3jet_R32->Fill(jets[0].pt, weight);
+                    LeadingJetPt_Zexc3jet_R43->Fill(jets[0].pt, weight);
+                    ExcJetRatiosPt_Zexc_R32->Divide(LeadingJetPt_Zexc3jet_R32,LeadingJetPt_Zexc2jet_R32, 1, 1);
+                    HTover2_Zexc3jet_R32->Fill((jets[0].pt + jets[1].pt)/2. , weight);
+                    HTover2_Zexc3jet_R43->Fill((jets[0].pt + jets[1].pt)/2. , weight);
+                    // no binomial option for just pt? does ht/2 need it?
+                    ExcJetRatiosHTover2_Zexc_R32->Divide(HTover2_Zexc3jet_R32,HTover2_Zexc2jet_R32,1,1);
+
                 }
             }
             if (nGoodJets >= 4){
@@ -3192,6 +3286,14 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                     AllJetEta_Zinc4jet->Fill(jets[j].eta, weight);
                     AllJetPhi_Zinc4jet->Fill(jets[j].phi, weight);
                 }
+
+                //andrew
+		//HTover2_Zinc4jet->Fill((jets[0].pt + jets[1].pt)/2. , weight);
+                HTover2_Zinc4jet_R43->Fill((jets[0].pt + jets[1].pt)/2. , weight);
+                IncJetRatiosHTover2_Z_R43->Divide(HTover2_Zinc4jet_R43,HTover2_Zinc3jet_R43,1,1,"B");            
+                LeadingJetPt_Zinc4jet_R43->Fill(jets[0].pt, weight);
+                IncJetRatiosPt_Z_R43->Divide(LeadingJetPt_Zinc4jet_R43, LeadingJetPt_Zinc3jet_R43,1, 1, "B");
+
                 if (nGoodJets == 4){
                     ZNGoodJets_Zexc_NoWeight->Fill(4.);
                     ZMass_Zexc4jet->Fill(Z.M(), weight);
@@ -3207,6 +3309,12 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                     dPhiLeptons_Zexc4jet->Fill(deltaPhi(lep1, lep2), weight);
                     dEtaLeptons_Zexc4jet->Fill(lepton1.eta - lepton2.eta, weight);
                     SpTLeptons_Zexc4jet->Fill(SpTsub(lep1, lep2), weight);
+
+                    //andrew
+                    LeadingJetPt_Zexc4jet_R43->Fill(jets[0].pt, weight);
+                    ExcJetRatiosPt_Zexc_R43->Divide(LeadingJetPt_Zexc4jet_R43,LeadingJetPt_Zexc3jet_R43, 1, 1);
+                    HTover2_Zexc4jet_R43->Fill((jets[0].pt + jets[1].pt)/2. , weight);
+                    ExcJetRatiosHTover2_Zexc_R43->Divide(HTover2_Zexc4jet_R43,HTover2_Zexc3jet_R43,1,1);
                 }
             }
             if (nGoodJets >= 5){

@@ -159,6 +159,9 @@ HistoSet::HistoSet(string leptonFlavor)
     string Sphi = "Sphi(j_{1}j_{2}#mu_{1}#mu_{2})";
     string lJetdEta = "#Delta#eta(#mu_{1}#mu_{2},j_{1})";
 
+//andrew
+    string HTover2 = "H_{T}/2 [GeV]";
+
     bool doWJets = false;
     if (leptonFlavor == "Electrons" || leptonFlavor == "DE" || leptonFlavor == "DE_") {
         Mll = "M_{ee} [GeV]";
@@ -199,7 +202,9 @@ HistoSet::HistoSet(string leptonFlavor)
 
     }
 
-    //int nJetPt_Zinc1jet(14);
+    //andrew
+//Different choices of how to bin Pt, Ht, Eta histos for 1,2,etc. jets
+//int nJetPt_Zinc1jet(14);
     //double jetPt_Zinc1jet[15] = {20, 24, 30, 39, 49, 62, 79, 105, 138, 181, 231, 294, 375, 494, 800};
     int nJetPt_Zinc1jet(14);
     double jetPt_Zinc1jet[15] = {20, 24, 30, 39, 49, 62, 79, 105, 138, 181, 231, 294, 375, 550, 900};
@@ -315,6 +320,31 @@ HistoSet::HistoSet(string leptonFlavor)
     double jetPtEta_Zinc1jet[9] = {30, 40, 52, 68, 88, 113, 144, 184, 480};
     int nJetPtEta_Zinc2jet(7);
     double jetPtEta_Zinc2jet[8] = {30, 40, 52, 68, 88, 113, 144, 377};
+
+
+    //andrew
+        //Ht/2 binning taken from AN2015_102 table 24
+            int nJetHTover2_Zinc2jet(29);
+            double jetHTover2_Zinc2jet[30] = {300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 640, 680, 720, 760, 800, 850, 900, 950, 1000, 1060, 1120, 1180, 1250, 1320, 1390, 1460, 1530, 1600, 1680};
+            int nJetHTover2_Zinc3jet(29);
+            double jetHTover2_Zinc3jet[30] = {300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 640, 680, 720, 760, 800, 850, 900, 950, 1000, 1060, 1120, 1180, 1250, 1320, 1390, 1460, 1530, 1600, 1680};
+            int nJetHTover2_Zinc4jet(29);
+            double jetHTover2_Zinc4jet[30] = {300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 640, 680, 720, 760, 800, 850, 900, 950, 1000, 1060, 1120, 1180, 1250, 1320, 1390, 1460, 1530, 1600, 1680};
+                                   
+    //Need to take Pt binning for inc. jet ratios adopted from SMP-16-005(?)
+    ////    int nJetPt_Z_R12(13);
+    ////    double jetPt_Z_R12[14] = {20, 24, 30, 39, 49, 62, 78, 105, 142, 185, 235, 300, 380, 500};
+    ////    int nJetPt_Z_R23(9);
+    ////    double jetPt_Z_R23[10] = {20, 24, 30, 41, 59, 81, 110, 152, 200, 300};
+    ////    int nJetPt_Z_R34(8);
+    ////    double jetPt_Z_R34[9] = {20, 24, 30, 39, 49, 62, 78, 96, 180};
+        
+            //Proposed binning from Ela
+                int nJetPt_ZIncRatios(14);
+                double jetPt_ZIncRatios[15] = {20, 25, 30, 40, 50, 65, 80, 105, 140, 185, 235, 300, 400, 550, 900};
+                //end andrew
+
+
 
     //***************************** Basic plots for Wjets *****************************//
     //--- For calculateing b-tagging efficiency---
@@ -474,7 +504,48 @@ HistoSet::HistoSet(string leptonFlavor)
     hresponseFourthJetPt_2_Zinc4jet     = newTH2D("hresponseFourthJetPt_2_Zinc4jet","hresp 4th jet pt ()2", jetPt_2_Zinc4jet, jetPt_2_Zinc4jet);
     hresponseFifthJetPt_2_Zinc5jet      = newTH2D("hresponseFifthJetPt_2_Zinc5jet", "hresp 5th jet pt ()2", jetPt_2_Zinc5jet, jetPt_2_Zinc5jet);
     
+   //andrew
+   //these all have same binning as of 5/3/17, but they are set up to have diff binning for each ratio
+   LeadingJetPt_Zinc1jet_R21 = newTH1D("LeadingJetPt_Zinc1jet_R21", "leading j_pt for 1 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    LeadingJetPt_Zinc2jet_R21 = newTH1D("LeadingJetPt_Zinc2jet_R21", "leading j_pt for 2 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    LeadingJetPt_Zinc2jet_R32 = newTH1D("LeadingJetPt_Zinc2jet_R32", "leading j_pt for 2 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    LeadingJetPt_Zinc3jet_R32 = newTH1D("LeadingJetPt_Zinc3jet_R32", "leading j_pt for 3 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    LeadingJetPt_Zinc3jet_R43 = newTH1D("LeadingJetPt_Zinc3jet_R43", "leading j_pt for 3 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    LeadingJetPt_Zinc4jet_R43 = newTH1D("LeadingJetPt_Zinc4jet_R43", "leading j_pt for 4 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios); 
+   IncJetRatiosPt_Z_R21 = newTH1D("IncJetRatiosPt_Z_R21", "inc. jet pt ratios - R21", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    IncJetRatiosPt_Z_R32 = newTH1D("IncJetRatiosPt_Z_R32", "inc. jet pt ratios - R32", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    IncJetRatiosPt_Z_R43 = newTH1D("IncJetRatiosPt_Z_R43", "inc. jet pt ratios - R43", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios); 
+
+    LeadingJetPt_Zexc1jet_R21 = newTH1D("LeadingJetPt_Zexc1jet_R21", "leading j_pt for 1 exc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    LeadingJetPt_Zexc2jet_R21 = newTH1D("LeadingJetPt_Zexc2jet_R21", "leading j_pt for 2 exc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    LeadingJetPt_Zexc2jet_R32 = newTH1D("LeadingJetPt_Zexc2jet_R32", "leading j_pt for 2 exc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    LeadingJetPt_Zexc3jet_R32 = newTH1D("LeadingJetPt_Zexc3jet_R32", "leading j_pt for 3 exc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    LeadingJetPt_Zexc3jet_R43 = newTH1D("LeadingJetPt_Zexc3jet_R43", "leading j_pt for 3 exc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    LeadingJetPt_Zexc4jet_R43 = newTH1D("LeadingJetPt_Zexc4jet_R43", "leading j_pt for 4 exc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    ExcJetRatiosPt_Zexc_R21 = newTH1D("ExcJetRatiosPt_Zexc_R21", "exc. jet pt ratios - R21", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    ExcJetRatiosPt_Zexc_R32 = newTH1D("ExcJetRatiosPt_Zexc_R32", "exc. jet pt ratios - R32", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    ExcJetRatiosPt_Zexc_R43 = newTH1D("ExcJetRatiosPt_Zexc_R43", "exc. jet pt ratios - R43", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+
+    genLeadingJetPt_Zinc1jet_R21 = newTH1D("genLeadingJetPt_Zinc1jet_R21", "gen leading j_pt for 1 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genLeadingJetPt_Zinc2jet_R21 = newTH1D("genLeadingJetPt_Zinc2jet_R21", "gen leading j_pt for 2 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genLeadingJetPt_Zinc2jet_R32 = newTH1D("genLeadingJetPt_Zinc2jet_R32", "gen leading j_pt for 2 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genLeadingJetPt_Zinc3jet_R32 = newTH1D("genLeadingJetPt_Zinc3jet_R32", "gen leading j_pt for 3 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genLeadingJetPt_Zinc3jet_R43 = newTH1D("genLeadingJetPt_Zinc3jet_R43", "gen leading j_pt for 3 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genLeadingJetPt_Zinc4jet_R43 = newTH1D("genLeadingJetPt_Zinc4jet_R43", "gen leading j_pt for 4 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genIncJetRatiosPt_Z_R21 = newTH1D("genIncJetRatiosPt_Z_R21", "gen inc. jet pt ratios - R21", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genIncJetRatiosPt_Z_R32 = newTH1D("genIncJetRatiosPt_Z_R32", "gen inc. jet pt ratios - R32", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genIncJetRatiosPt_Z_R43 = newTH1D("genIncJetRatiosPt_Z_R43", "gen inc. jet pt ratios - R43", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
     
+    genLeadingJetPt_Zexc1jet_R21 = newTH1D("genLeadingJetPt_Zexc1jet_R21", "gen leading j_pt for 1 exc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genLeadingJetPt_Zexc2jet_R21 = newTH1D("genLeadingJetPt_Zexc2jet_R21", "gen leading j_pt for 2 exc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genLeadingJetPt_Zexc2jet_R32 = newTH1D("genLeadingJetPt_Zexc2jet_R32", "gen leading j_pt for 2 exc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genLeadingJetPt_Zexc3jet_R32 = newTH1D("genLeadingJetPt_Zexc3jet_R32", "gen leading j_pt for 3 exc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genLeadingJetPt_Zexc3jet_R43 = newTH1D("genLeadingJetPt_Zexc3jet_R43", "gen leading j_pt for 3 exc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genLeadingJetPt_Zexc4jet_R43 = newTH1D("genLeadingJetPt_Zexc4jet_R43", "gen leading j_pt for 4 exc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genExcJetRatiosPt_Zexc_R21 = newTH1D("genExcJetRatiosPt_Zexc_R21", "gen exc. jet pt ratios - R21", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genExcJetRatiosPt_Zexc_R32 = newTH1D("genExcJetRatiosPt_Zexc_R32", "gen exc. jet pt ratios - R32", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+    genExcJetRatiosPt_Zexc_R43 = newTH1D("genExcJetRatiosPt_Zexc_R43", "gen exc. jet pt ratios - R43", "p_{T}(j_{leading}) [GeV]", nJetPt_ZIncRatios, jetPt_ZIncRatios);
+
     //--- Jet Ht -----------
     JetsHT_Zinc1jet            = newTH1D("JetsHT_Zinc1jet",        "Scalar sum jets p_{T} (N_{jets} #geq 1)",     HT,     nJetHT_Zinc1jet, jetHT_Zinc1jet);
     JetsHT_20_Zinc1jet         = newTH1D("JetsHT_20_Zinc1jet",        "Scalar sum jets p_{T} (N_{jets} #geq 1)",     HT,     nJetHT_20_Zinc1jet, jetHT_20_Zinc1jet);
@@ -559,7 +630,6 @@ HistoSet::HistoSet(string leptonFlavor)
     hresponseJetsHT_2_Zinc4jet = newTH2D("hresponseJetsHT_2_Zinc4jet", "hresp Scalar sum jets p_{T} (N_{jets} #geq 4)2", jetHT_2_Zinc4jet, jetHT_2_Zinc4jet);
     hresponseJetsHT_2_Zinc5jet = newTH2D("hresponseJetsHT_2_Zinc5jet", "hresp Scalar sum jets p_{T} (N_{jets} #geq 5)2", jetHT_2_Zinc5jet, jetHT_2_Zinc5jet);
     
-    
     //--- Jet eta -----------
     FirstJetEta_Zinc1jet                = newTH1D("FirstJetEta_Zinc1jet",                "1st jet #eta (N_{jets} #geq 1)",              "|#eta(j_{1})|",   32, 0., 2.4);
     FirstJetEta_2_Zinc1jet              = newTH1D("FirstJetEta_2_Zinc1jet",              "1st jet #eta (N_{jets} #geq 1)2",             "|#eta(j_{1})|",  160, 0., 2.4);
@@ -608,6 +678,45 @@ HistoSet::HistoSet(string leptonFlavor)
     hresponseFourthJetEta_2_Zinc4jet    = newTH2D("hresponseFourthJetEta_2_Zinc4jet", "hresp 4th jet #eta (N_{jets} #geq 4)2", 60,  0., 2.4,  60, 0., 2.4);
     hresponseFifthJetEta_2_Zinc5jet     = newTH2D("hresponseFifthJetEta_2_Zinc5jet",  "hresp 5th jet #eta (N_{jets} #geq 5)2", 30,  0., 2.4,  30, 0., 2.4);
     
+    //andrew
+    //---Jet HT/2
+    //need to change binning
+    //HTover2_Zinc2jet = newTH1D("HTover2_Zinc2jet", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc2jet, jetHTover2_Zinc2jet);
+    //HTover2_Zinc3jet = newTH1D("HTover2_Zinc3jet", "Scalar sum jets p_{T} over 2 #geq 3)", HTover2, nJetHTover2_Zinc3jet, jetHTover2_Zinc3jet);
+    //HTover2_Zinc4jet = newTH1D("HTover2_Zinc4jet", "Scalar sum jets p_{T} over 2 #geq 4)", HTover2, nJetHTover2_Zinc4jet, jetHTover2_Zinc4jet);
+
+    //these all have same binning as of 5/7/17, but they are set up to have diff binning for each ratio
+    
+   
+    HTover2_Zinc2jet_R32 = newTH1D("HTover2_Zinc2jet", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc2jet, jetHTover2_Zinc2jet);
+    HTover2_Zinc3jet_R32 = newTH1D("HTover2_Zinc3jet", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc3jet, jetHTover2_Zinc3jet);
+    HTover2_Zinc3jet_R43 = newTH1D("HTover2_Zinc3jet", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc3jet, jetHTover2_Zinc3jet);
+    HTover2_Zinc4jet_R43 = newTH1D("HTover2_Zinc4jet", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc4jet, jetHTover2_Zinc4jet);
+    IncJetRatiosHTover2_Z_R32 = newTH1D("IncJetRatiosHTover2_Z_R32", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc3jet, jetHTover2_Zinc3jet);
+    IncJetRatiosHTover2_Z_R43 = newTH1D("IncJetRatiosHTover2_Z_R43", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc4jet, jetHTover2_Zinc4jet);
+
+    HTover2_Zexc2jet_R32 = newTH1D("HTover2_Zexc2jet_R32", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc2jet, jetHTover2_Zinc2jet);
+    HTover2_Zexc3jet_R32 = newTH1D("HTover2_Zexc3jet_R32", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc3jet, jetHTover2_Zinc3jet);
+    HTover2_Zexc3jet_R43 = newTH1D("HTover2_Zexc3jet_R43", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc3jet, jetHTover2_Zinc3jet);
+    HTover2_Zexc4jet_R43 = newTH1D("HTover2_Zexc4jet_R43", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc4jet, jetHTover2_Zinc4jet);
+    ExcJetRatiosHTover2_Zexc_R32 = newTH1D("ExcJetRatiosHTover2_Zexc_R32", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc2jet, jetHTover2_Zinc2jet);
+    ExcJetRatiosHTover2_Zexc_R43 = newTH1D("ExcJetRatiosHTover2_Zexc_R43", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc2jet, jetHTover2_Zinc2jet);
+
+    genHTover2_Zinc2jet_R32 = newTH1D("genHTover2_Zinc2jet", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc2jet, jetHTover2_Zinc2jet);
+    genHTover2_Zinc3jet_R32 = newTH1D("genHTover2_Zinc3jet", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc3jet, jetHTover2_Zinc3jet);
+    genHTover2_Zinc3jet_R43 = newTH1D("genHTover2_Zinc3jet", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc3jet, jetHTover2_Zinc3jet);
+    genHTover2_Zinc4jet_R43 = newTH1D("genHTover2_Zinc4jet", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc4jet, jetHTover2_Zinc4jet);
+    genIncJetRatiosHTover2_Z_R32 = newTH1D("genIncJetRatiosHTover2_Z_R32", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc3jet, jetHTover2_Zinc3jet);
+    genIncJetRatiosHTover2_Z_R43 = newTH1D("genIncJetRatiosHTover2_Z_R43", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc4jet, jetHTover2_Zinc4jet);
+    
+    genHTover2_Zexc2jet_R32 = newTH1D("genHTover2_Zexc2jet_R32", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc2jet, jetHTover2_Zinc2jet);
+    genHTover2_Zexc3jet_R32 = newTH1D("genHTover2_Zexc3jet_R32", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc3jet, jetHTover2_Zinc3jet);
+    genHTover2_Zexc3jet_R43 = newTH1D("genHTover2_Zexc3jet_R43", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc3jet, jetHTover2_Zinc3jet);
+    genHTover2_Zexc4jet_R43 = newTH1D("genHTover2_Zexc4jet_R43", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc4jet, jetHTover2_Zinc4jet);
+    genExcJetRatiosHTover2_Zexc_R32 = newTH1D("genExcJetRatiosHTover2_Zexc_R32", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc3jet, jetHTover2_Zinc3jet);
+    genExcJetRatiosHTover2_Zexc_R43 = newTH1D("genExcJetRatiosHTover2_Zexc_R43", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Zinc4jet, jetHTover2_Zinc4jet);
+
+
     //************************************************************** Additional Variables *********************************************************************************//
     
     //------ dRapidityJets -----------
