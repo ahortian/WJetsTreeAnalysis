@@ -24,7 +24,7 @@
     }
         
     //------ External configurations (change these if you wish) ---
-    int doWhat       = 100;
+    int doWhat       = 4;
                               // 100 - all ; 0 - data, 1 - background , 2 - tau ?, 3 - DY, 4 - W+jets,
                               // 51 - MC gen, 90 - PDF Syst., 1001 - do pull DY samples
         
