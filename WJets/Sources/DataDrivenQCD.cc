@@ -47,9 +47,9 @@ using namespace std;
 const int NQCD = 4 ;
 const int NMC = 10 ;
 
-string energy = getEnergy();
+//string energy = getEnergy();
 //potential bug fix
-energy = "13TeV";
+string energy = "13TeV";
 int JetPtMin(30);
 int JetPtMax(0);
 
