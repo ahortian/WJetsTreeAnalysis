@@ -3464,6 +3464,16 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 
                 hresponseFirstJetAbsRapidity_Zinc1jet->Fill(fabs(newLeadJ.Rapidity()), fabs(genNewLeadJ.Rapidity()), weight);
                 hresponseFirstJetAbsRapidity_2_Zinc1jet->Fill(fabs(newLeadJ.Rapidity()), fabs(genNewLeadJ.Rapidity()), weight);
+                
+                //andrew edit
+                hresponseLeadingJetPt_Zinc1jet_R21->Fill(jets[0].pt, genJets[0].pt, weight);
+                if (nGoodGenJets == 1 && nGoodJets == 1){
+                    hresponseLeadingJetPt_Zexc1jet_R21->Fill(jets[0].pt, genJets[0].pt, weight);
+                }
+                
+                
+                
+                
             }
             //-- Second Jet Pt
             if (nGoodGenJets >= 2 && nGoodJets >= 2){
@@ -3503,6 +3513,17 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 
                 hresponseSecondJetAbsRapidity_Zinc2jet->Fill(fabs(newSecondJ.Rapidity()), fabs(genNewSecondJ.Rapidity()), weight);
                 hresponseSecondJetAbsRapidity_2_Zinc2jet->Fill(fabs(newSecondJ.Rapidity()), fabs(genNewSecondJ.Rapidity()), weight);
+                
+                //andrew edit
+                hresponseLeadingJetPt_Zinc2jet_R21->Fill(jets[0].pt, genJets[0].pt, weight);
+                hresponseLeadingJetPt_Zinc2jet_R32->Fill(jets[0].pt, genJets[0].pt, weight);
+                hresponseHTover2_Zinc2jet_R32->Fill((jets[0].pt+jets[1].pt)/2., (genJets[0].pt+genJets[1].pt)/2., weight);
+                if (nGoodGenJets == 2 && nGoodJets == 2){
+                    hresponseLeadingJetPt_Zexc2jet_R21->Fill(jets[0].pt, genJets[0].pt, weight);
+                    hresponseLeadingJetPt_Zexc2jet_R32->Fill(jets[0].pt, genJets[0].pt, weight);
+                    hresponseHTover2_Zexc2jet_R32->Fill((jets[0].pt+jets[1].pt)/2., (genJets[0].pt+genJets[1].pt)/2., weight);
+                }
+                
             }
             //-- Third Jet Pt
             if (nGoodGenJets >= 3 && nGoodJets >= 3){
@@ -3539,6 +3560,19 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 
                 hresponseThirdJetAbsRapidity_Zinc3jet->Fill(fabs(newThirdJ.Rapidity()), fabs(genNewThirdJ.Rapidity()), weight);
                 hresponseThirdJetAbsRapidity_2_Zinc3jet->Fill(fabs(newThirdJ.Rapidity()), fabs(genNewThirdJ.Rapidity()), weight);
+                
+                //andrew edit
+                hresponseLeadingJetPt_Zinc3jet_R32->Fill(jets[0].pt, genJets[0].pt, weight);
+                hresponseLeadingJetPt_Zinc3jet_R43->Fill(jets[0].pt, genJets[0].pt, weight);
+                hresponseHTover2_Zinc3jet_R32->Fill((jets[0].pt+jets[1].pt)/2., (genJets[0].pt+genJets[1].pt)/2., weight);
+                hresponseHTover2_Zinc3jet_R43->Fill((jets[0].pt+jets[1].pt)/2., (genJets[0].pt+genJets[1].pt)/2., weight);
+                if (nGoodGenJets == 3 && nGoodJets == 3){
+                    hresponseLeadingJetPt_Zexc3jet_R32->Fill(jets[0].pt, genJets[0].pt, weight);
+                    hresponseLeadingJetPt_Zexc3jet_R43->Fill(jets[0].pt, genJets[0].pt, weight);
+                    hresponseHTover2_Zexc3jet_R32->Fill((jets[0].pt+jets[1].pt)/2., (genJets[0].pt+genJets[1].pt)/2., weight);
+                    hresponseHTover2_Zexc3jet_R43->Fill((jets[0].pt+jets[1].pt)/2., (genJets[0].pt+genJets[1].pt)/2., weight);
+                }
+                
             }
             //-- Fourth Jet Pt
             if (nGoodGenJets >= 4 && nGoodJets >= 4){
@@ -3569,6 +3603,16 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 
                 hresponseFourthJetAbsRapidity_Zinc4jet->Fill(fabs(newFourthJ.Rapidity()), fabs(genNewFourthJ.Rapidity()), weight);
                 hresponseFourthJetAbsRapidity_2_Zinc4jet->Fill(fabs(newFourthJ.Rapidity()), fabs(genNewFourthJ.Rapidity()), weight);
+                
+                //andrew edit
+                hresponseLeadingJetPt_Zinc4jet_R43->Fill(jets[0].pt, genJets[0].pt, weight);
+                hresponseHTover2_Zinc4jet_R43->Fill((jets[0].pt+jets[1].pt)/2., (genJets[0].pt+genJets[1].pt)/2., weight);
+                if (nGoodGenJets == 4 && nGoodJets == 4){
+                    hresponseLeadingJetPt_Zexc4jet_R43->Fill(jets[0].pt, genJets[0].pt, weight);
+                    hresponseHTover2_Zexc4jet_R43->Fill((jets[0].pt+jets[1].pt)/2., (genJets[0].pt+genJets[1].pt)/2., weight);
+                }
+                
+                
             }
             //-- Fifth Jet Pt
             if (nGoodGenJets >= 5 && nGoodJets >= 5){

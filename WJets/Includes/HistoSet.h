@@ -96,7 +96,6 @@ public:
     TH1D *SixthJetPt_1_Zinc6jet;
     TH1D *SixthJetPt_2_Zinc6jet;
   
-    //andrew
     TH1D *LeadingJetPt_Zinc1jet_R21;
     TH1D *LeadingJetPt_Zinc2jet_R21;
     TH1D *LeadingJetPt_Zinc2jet_R32;
@@ -129,7 +128,6 @@ public:
     TH1D *genSixthJetPt_1_Zinc6jet;
     TH1D *genSixthJetPt_2_Zinc6jet;
 
-    //andrew -- 5/19/17
     TH1D *genLeadingJetPt_Zinc1jet_R21;
     TH1D *genLeadingJetPt_Zinc2jet_R21;
     TH1D *genLeadingJetPt_Zinc2jet_R32;
@@ -161,6 +159,19 @@ public:
     TH2D *hresponseSixthJetPt_Zinc6jet;
     TH2D *hresponseSixthJetPt_1_Zinc6jet;
     TH2D *hresponseSixthJetPt_2_Zinc6jet;
+
+    TH2D *hresponseLeadingJetPt_Zinc1jet_R21;
+    TH2D *hresponseLeadingJetPt_Zinc2jet_R21;
+    TH2D *hresponseLeadingJetPt_Zinc2jet_R32;
+    TH2D *hresponseLeadingJetPt_Zinc3jet_R32;
+    TH2D *hresponseLeadingJetPt_Zinc3jet_R43;
+    TH2D *hresponseLeadingJetPt_Zinc4jet_R43;
+    TH2D *hresponseLeadingJetPt_Zexc1jet_R21;
+    TH2D *hresponseLeadingJetPt_Zexc2jet_R21;
+    TH2D *hresponseLeadingJetPt_Zexc2jet_R32;
+    TH2D *hresponseLeadingJetPt_Zexc3jet_R32;
+    TH2D *hresponseLeadingJetPt_Zexc3jet_R43;
+    TH2D *hresponseLeadingJetPt_Zexc4jet_R43;
 
     //--- Jet Ht
     TH1D *JetsHT_Zinc1jet;
@@ -238,7 +249,6 @@ public:
     TH2D *hresponseJetsHT_2_Zinc5jet;
     TH2D *hresponseJetsHT_2_Zinc6jet;
 
-    //andrew
     //--- Jet HT/2
     TH1D *HTover2_Zinc2jet_R32;
     TH1D *HTover2_Zinc3jet_R32;
@@ -257,7 +267,15 @@ public:
     TH1D *genHTover2_Zexc3jet_R32;
     TH1D *genHTover2_Zexc3jet_R43;
     TH1D *genHTover2_Zexc4jet_R43;
-
+    
+    TH2D *hresponseHTover2_Zinc2jet_R32;
+    TH2D *hresponseHTover2_Zinc3jet_R32;
+    TH2D *hresponseHTover2_Zinc3jet_R43;
+    TH2D *hresponseHTover2_Zinc4jet_R43;
+    TH2D *hresponseHTover2_Zexc2jet_R32;
+    TH2D *hresponseHTover2_Zexc3jet_R32;
+    TH2D *hresponseHTover2_Zexc3jet_R43;
+    TH2D *hresponseHTover2_Zexc4jet_R43;
 
     //--- Jet eta
     TH1D *FirstJetEta_Zinc1jet;
