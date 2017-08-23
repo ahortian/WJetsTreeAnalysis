@@ -277,6 +277,22 @@ public:
     TH2D *hresponseHTover2_Zexc3jet_R43;
     TH2D *hresponseHTover2_Zexc4jet_R43;
 
+    //---Jet HT/3
+    TH1D *HTover3_Zinc3jet_R43;
+    TH1D *HTover3_Zinc4jet_R43;
+    TH1D *HTover3_Zexc3jet_R43;
+    TH1D *HTover3_Zexc4jet_R43;
+    
+    TH1D *genHTover3_Zinc3jet_R43;
+    TH1D *genHTover3_Zinc4jet_R43;
+    TH1D *genHTover3_Zexc3jet_R43;
+    TH1D *genHTover3_Zexc4jet_R43;
+    
+    TH2D *hresponseHTover3_Zinc3jet_R43;
+    TH2D *hresponseHTover3_Zinc4jet_R43;
+    TH2D *hresponseHTover3_Zexc3jet_R43;
+    TH2D *hresponseHTover3_Zexc4jet_R43;
+
     //--- Jet eta
     TH1D *FirstJetEta_Zinc1jet;
     TH1D *FirstJetEta_2_Zinc1jet;

@@ -161,6 +161,7 @@ HistoSet::HistoSet(string leptonFlavor)
 
 //andrew
     string HTover2 = "H_{T}/2 [GeV]";
+    string HTover3 = "H_{T}/3 [GeV]";
 
     bool doWJets = false;
     if (leptonFlavor == "Electrons" || leptonFlavor == "DE" || leptonFlavor == "DE_") {
@@ -711,6 +712,27 @@ HistoSet::HistoSet(string leptonFlavor)
     hresponseHTover2_Zexc3jet_R32 = newTH2D("hresponseHTover2_Zexc3jet_R32", "hresp HT/2 exc jets p_{T} (N_{jets} #geq 3)", nJetHTover2_Z3jet, jetHTover2_Z3jet, nJetHTover2_Z3jet, jetHTover2_Z3jet);
     hresponseHTover2_Zexc3jet_R43 = newTH2D("hresponseHTover2_Zexc3jet_R43", "hresp HT/2 exc jets p_{T} (N_{jets} #geq 3)", nJetHTover2_Z3jet, jetHTover2_Z3jet, nJetHTover2_Z3jet, jetHTover2_Z3jet);
     hresponseHTover2_Zexc4jet_R43 = newTH2D("hresponseHTover2_Zexc4jet_R43", "hresp HT/2 exc jets p_{T} (N_{jets} #geq 4)", nJetHTover2_Z4jet, jetHTover2_Z4jet, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+
+    //---Jet HT/3
+    
+    HTover3_Zinc3jet_R43 = newTH1D("HTover3_Zinc3jet_R43", "Scalar sum jets p_{T} over 3 (N_{jets} #geq 3)", HTover3, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    HTover3_Zinc4jet_R43 = newTH1D("HTover3_Zinc4jet_R43", "Scalar sum jets p_{T} over 3 (N_{jets} #geq 4)", HTover3, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+    
+    HTover3_Zexc3jet_R43 = newTH1D("HTover3_Zexc3jet_R43", "Scalar sum jets p_{T} over 3 (N_{jets} #geq 3)", HTover3, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    HTover3_Zexc4jet_R43 = newTH1D("HTover3_Zexc4jet_R43", "Scalar sum jets p_{T} over 3 (N_{jets} #geq 4)", HTover3, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+    
+    genHTover3_Zinc3jet_R43 = newTH1D("genHTover3_Zinc3jet_R43", "gen Scalar sum jets p_{T} over 3 (N_{jets} #geq 3)", HTover3, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    genHTover3_Zinc4jet_R43 = newTH1D("genHTover3_Zinc4jet_R43", "gen Scalar sum jets p_{T} over 3 (N_{jets} #geq 4)", HTover3, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+    
+    genHTover3_Zexc3jet_R43 = newTH1D("genHTover3_Zexc3jet_R43", "gen Scalar sum jets p_{T} over 3 (N_{jets} #geq 3)", HTover3, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    genHTover3_Zexc4jet_R43 = newTH1D("genHTover3_Zexc4jet_R43", "gen Scalar sum jets p_{T} over 3 (N_{jets} #geq 4)", HTover3, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+    
+    hresponseHTover3_Zinc3jet_R43 = newTH2D("hresponseHTover3_Zinc3jet_R43", "hresp HT/3 inc jets p_{T} (N_{jets} #geq 3)", nJetHTover2_Z3jet, jetHTover2_Z3jet, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    hresponseHTover3_Zinc4jet_R43 = newTH2D("hresponseHTover3_Zinc4jet_R43", "hresp HT/3 inc jets p_{T} (N_{jets} #geq 4)", nJetHTover2_Z4jet, jetHTover2_Z4jet, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+    
+    hresponseHTover3_Zexc3jet_R43 = newTH2D("hresponseHTover3_Zexc3jet_R43", "hresp HT/3 exc jets p_{T} (N_{jets} #geq 3)", nJetHTover2_Z3jet, jetHTover2_Z3jet, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    hresponseHTover3_Zexc4jet_R43 = newTH2D("hresponseHTover3_Zexc4jet_R43", "hresp HT/3 exc jets p_{T} (N_{jets} #geq 4)", nJetHTover2_Z4jet, jetHTover2_Z4jet, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+
 
 
     //************************************************************** Additional Variables *********************************************************************************//
