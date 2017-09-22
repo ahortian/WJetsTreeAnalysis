@@ -506,7 +506,7 @@ HistoSet::HistoSet(string leptonFlavor)
     
    //andrew
    //these all have same binning as of 5/3/17, but they are set up to have diff binning for each ratio
-   LeadingJetPt_Zinc1jet_R21 = newTH1D("LeadingJetPt_Zinc1jet_R21", "leading j_pt for 1 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZRatios, jetPt_ZRatios);
+    LeadingJetPt_Zinc1jet_R21 = newTH1D("LeadingJetPt_Zinc1jet_R21", "leading j_pt for 1 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZRatios, jetPt_ZRatios);
     LeadingJetPt_Zinc2jet_R21 = newTH1D("LeadingJetPt_Zinc2jet_R21", "leading j_pt for 2 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZRatios, jetPt_ZRatios);
     LeadingJetPt_Zinc2jet_R32 = newTH1D("LeadingJetPt_Zinc2jet_R32", "leading j_pt for 2 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZRatios, jetPt_ZRatios);
     LeadingJetPt_Zinc3jet_R32 = newTH1D("LeadingJetPt_Zinc3jet_R32", "leading j_pt for 3 inc jet", "p_{T}(j_{leading}) [GeV]", nJetPt_ZRatios, jetPt_ZRatios);
@@ -683,55 +683,55 @@ HistoSet::HistoSet(string leptonFlavor)
     //andrew
     //---Jet HT/2
    
-    HTover2_Zinc2jet_R32 = newTH1D("HTover2_Zinc2jet_R32", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z2jet, jetHTover2_Z2jet);
-    HTover2_Zinc3jet_R32 = newTH1D("HTover2_Zinc3jet_R32", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
-    HTover2_Zinc3jet_R43 = newTH1D("HTover2_Zinc3jet_R43", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
-    HTover2_Zinc4jet_R43 = newTH1D("HTover2_Zinc4jet_R43", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+    HTover2_Zinc2jet_R32 = newTH1D("HTover2_Zinc2jet_R32", "Scalar sum jets p_{T} over 2 (N_{jets} #geq 2)", HTover2, nJetHTover2_Z2jet, jetHTover2_Z2jet);
+    HTover2_Zinc3jet_R32 = newTH1D("HTover2_Zinc3jet_R32", "Scalar sum jets p_{T} over 2 (N_{jets} #geq 3)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    HTover2_Zinc3jet_R43 = newTH1D("HTover2_Zinc3jet_R43", "Scalar sum jets p_{T} over 2 (N_{jets} #geq 3)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    HTover2_Zinc4jet_R43 = newTH1D("HTover2_Zinc4jet_R43", "Scalar sum jets p_{T} over 2 (N_{jets} #geq 4)", HTover2, nJetHTover2_Z4jet, jetHTover2_Z4jet);
 
-    HTover2_Zexc2jet_R32 = newTH1D("HTover2_Zexc2jet_R32", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z2jet, jetHTover2_Z2jet);
-    HTover2_Zexc3jet_R32 = newTH1D("HTover2_Zexc3jet_R32", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
-    HTover2_Zexc3jet_R43 = newTH1D("HTover2_Zexc3jet_R43", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
-    HTover2_Zexc4jet_R43 = newTH1D("HTover2_Zexc4jet_R43", "Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+    HTover2_Zexc2jet_R32 = newTH1D("HTover2_Zexc2jet_R32", "Scalar sum jets p_{T} over 2 (N_{jets} = 2)", HTover2, nJetHTover2_Z2jet, jetHTover2_Z2jet);
+    HTover2_Zexc3jet_R32 = newTH1D("HTover2_Zexc3jet_R32", "Scalar sum jets p_{T} over 2 (N_{jets} = 3)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    HTover2_Zexc3jet_R43 = newTH1D("HTover2_Zexc3jet_R43", "Scalar sum jets p_{T} over 2 (N_{jets} = 3)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    HTover2_Zexc4jet_R43 = newTH1D("HTover2_Zexc4jet_R43", "Scalar sum jets p_{T} over 2 (N_{jets} = 4)", HTover2, nJetHTover2_Z4jet, jetHTover2_Z4jet);
 
-    genHTover2_Zinc2jet_R32 = newTH1D("genHTover2_Zinc2jet_R32", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z2jet, jetHTover2_Z2jet);
-    genHTover2_Zinc3jet_R32 = newTH1D("genHTover2_Zinc3jet_R32", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
-    genHTover2_Zinc3jet_R43 = newTH1D("genHTover2_Zinc3jet_R43", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
-    genHTover2_Zinc4jet_R43 = newTH1D("genHTover2_Zinc4jet_R43", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+    genHTover2_Zinc2jet_R32 = newTH1D("genHTover2_Zinc2jet_R32", "gen Scalar sum jets p_{T} over 2 (N_{jets} #geq 2)", HTover2, nJetHTover2_Z2jet, jetHTover2_Z2jet);
+    genHTover2_Zinc3jet_R32 = newTH1D("genHTover2_Zinc3jet_R32", "gen Scalar sum jets p_{T} over 2 (N_{jets} #geq 3)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    genHTover2_Zinc3jet_R43 = newTH1D("genHTover2_Zinc3jet_R43", "gen Scalar sum jets p_{T} over 2 (N_{jets} #geq 3)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    genHTover2_Zinc4jet_R43 = newTH1D("genHTover2_Zinc4jet_R43", "gen Scalar sum jets p_{T} over 2 (N_{jets} #geq 4)", HTover2, nJetHTover2_Z4jet, jetHTover2_Z4jet);
     
-    genHTover2_Zexc2jet_R32 = newTH1D("genHTover2_Zexc2jet_R32", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z2jet, jetHTover2_Z2jet);
-    genHTover2_Zexc3jet_R32 = newTH1D("genHTover2_Zexc3jet_R32", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
-    genHTover2_Zexc3jet_R43 = newTH1D("genHTover2_Zexc3jet_R43", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
-    genHTover2_Zexc4jet_R43 = newTH1D("genHTover2_Zexc4jet_R43", "gen Scalar sum jets p_{T} over 2 #geq 2)", HTover2, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+    genHTover2_Zexc2jet_R32 = newTH1D("genHTover2_Zexc2jet_R32", "gen Scalar sum jets p_{T} over 2 (N_{jets} = 2)", HTover2, nJetHTover2_Z2jet, jetHTover2_Z2jet);
+    genHTover2_Zexc3jet_R32 = newTH1D("genHTover2_Zexc3jet_R32", "gen Scalar sum jets p_{T} over 2 (N_{jets} = 3)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    genHTover2_Zexc3jet_R43 = newTH1D("genHTover2_Zexc3jet_R43", "gen Scalar sum jets p_{T} over 2 (N_{jets} = 3)", HTover2, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    genHTover2_Zexc4jet_R43 = newTH1D("genHTover2_Zexc4jet_R43", "gen Scalar sum jets p_{T} over 2 (N_{jets} = 4)", HTover2, nJetHTover2_Z4jet, jetHTover2_Z4jet);
     
     hresponseHTover2_Zinc2jet_R32 = newTH2D("hresponseHTover2_Zinc2jet_R32", "hresp HT/2 inc jets p_{T} (N_{jets} #geq 2)", nJetHTover2_Z2jet, jetHTover2_Z2jet, nJetHTover2_Z2jet, jetHTover2_Z2jet);
     hresponseHTover2_Zinc3jet_R32 = newTH2D("hresponseHTover2_Zinc3jet_R32", "hresp HT/2 inc jets p_{T} (N_{jets} #geq 3)", nJetHTover2_Z3jet, jetHTover2_Z3jet, nJetHTover2_Z3jet, jetHTover2_Z3jet);
     hresponseHTover2_Zinc3jet_R43 = newTH2D("hresponseHTover2_Zinc3jet_R43", "hresp HT/2 inc jets p_{T} (N_{jets} #geq 3)", nJetHTover2_Z3jet, jetHTover2_Z3jet, nJetHTover2_Z3jet, jetHTover2_Z3jet);
     hresponseHTover2_Zinc4jet_R43 = newTH2D("hresponseHTover2_Zinc4jet_R43", "hresp HT/2 inc jets p_{T} (N_{jets} #geq 4)", nJetHTover2_Z4jet, jetHTover2_Z4jet, nJetHTover2_Z4jet, jetHTover2_Z4jet);
     
-    hresponseHTover2_Zexc2jet_R32 = newTH2D("hresponseHTover2_Zexc2jet_R32", "hresp HT/2 exc jets p_{T} (N_{jets} #geq 2)", nJetHTover2_Z2jet, jetHTover2_Z2jet, nJetHTover2_Z2jet, jetHTover2_Z2jet);
-    hresponseHTover2_Zexc3jet_R32 = newTH2D("hresponseHTover2_Zexc3jet_R32", "hresp HT/2 exc jets p_{T} (N_{jets} #geq 3)", nJetHTover2_Z3jet, jetHTover2_Z3jet, nJetHTover2_Z3jet, jetHTover2_Z3jet);
-    hresponseHTover2_Zexc3jet_R43 = newTH2D("hresponseHTover2_Zexc3jet_R43", "hresp HT/2 exc jets p_{T} (N_{jets} #geq 3)", nJetHTover2_Z3jet, jetHTover2_Z3jet, nJetHTover2_Z3jet, jetHTover2_Z3jet);
-    hresponseHTover2_Zexc4jet_R43 = newTH2D("hresponseHTover2_Zexc4jet_R43", "hresp HT/2 exc jets p_{T} (N_{jets} #geq 4)", nJetHTover2_Z4jet, jetHTover2_Z4jet, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+    hresponseHTover2_Zexc2jet_R32 = newTH2D("hresponseHTover2_Zexc2jet_R32", "hresp HT/2 exc jets p_{T} (N_{jets} = 2)", nJetHTover2_Z2jet, jetHTover2_Z2jet, nJetHTover2_Z2jet, jetHTover2_Z2jet);
+    hresponseHTover2_Zexc3jet_R32 = newTH2D("hresponseHTover2_Zexc3jet_R32", "hresp HT/2 exc jets p_{T} (N_{jets} = 3)", nJetHTover2_Z3jet, jetHTover2_Z3jet, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    hresponseHTover2_Zexc3jet_R43 = newTH2D("hresponseHTover2_Zexc3jet_R43", "hresp HT/2 exc jets p_{T} (N_{jets} = 3)", nJetHTover2_Z3jet, jetHTover2_Z3jet, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    hresponseHTover2_Zexc4jet_R43 = newTH2D("hresponseHTover2_Zexc4jet_R43", "hresp HT/2 exc jets p_{T} (N_{jets} = 4)", nJetHTover2_Z4jet, jetHTover2_Z4jet, nJetHTover2_Z4jet, jetHTover2_Z4jet);
 
     //---Jet HT/3
     
     HTover3_Zinc3jet_R43 = newTH1D("HTover3_Zinc3jet_R43", "Scalar sum jets p_{T} over 3 (N_{jets} #geq 3)", HTover3, nJetHTover2_Z3jet, jetHTover2_Z3jet);
     HTover3_Zinc4jet_R43 = newTH1D("HTover3_Zinc4jet_R43", "Scalar sum jets p_{T} over 3 (N_{jets} #geq 4)", HTover3, nJetHTover2_Z4jet, jetHTover2_Z4jet);
     
-    HTover3_Zexc3jet_R43 = newTH1D("HTover3_Zexc3jet_R43", "Scalar sum jets p_{T} over 3 (N_{jets} #geq 3)", HTover3, nJetHTover2_Z3jet, jetHTover2_Z3jet);
-    HTover3_Zexc4jet_R43 = newTH1D("HTover3_Zexc4jet_R43", "Scalar sum jets p_{T} over 3 (N_{jets} #geq 4)", HTover3, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+    HTover3_Zexc3jet_R43 = newTH1D("HTover3_Zexc3jet_R43", "Scalar sum jets p_{T} over 3 (N_{jets} = 3)", HTover3, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    HTover3_Zexc4jet_R43 = newTH1D("HTover3_Zexc4jet_R43", "Scalar sum jets p_{T} over 3 (N_{jets} = 4)", HTover3, nJetHTover2_Z4jet, jetHTover2_Z4jet);
     
     genHTover3_Zinc3jet_R43 = newTH1D("genHTover3_Zinc3jet_R43", "gen Scalar sum jets p_{T} over 3 (N_{jets} #geq 3)", HTover3, nJetHTover2_Z3jet, jetHTover2_Z3jet);
     genHTover3_Zinc4jet_R43 = newTH1D("genHTover3_Zinc4jet_R43", "gen Scalar sum jets p_{T} over 3 (N_{jets} #geq 4)", HTover3, nJetHTover2_Z4jet, jetHTover2_Z4jet);
     
-    genHTover3_Zexc3jet_R43 = newTH1D("genHTover3_Zexc3jet_R43", "gen Scalar sum jets p_{T} over 3 (N_{jets} #geq 3)", HTover3, nJetHTover2_Z3jet, jetHTover2_Z3jet);
-    genHTover3_Zexc4jet_R43 = newTH1D("genHTover3_Zexc4jet_R43", "gen Scalar sum jets p_{T} over 3 (N_{jets} #geq 4)", HTover3, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+    genHTover3_Zexc3jet_R43 = newTH1D("genHTover3_Zexc3jet_R43", "gen Scalar sum jets p_{T} over 3 (N_{jets} = 3)", HTover3, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    genHTover3_Zexc4jet_R43 = newTH1D("genHTover3_Zexc4jet_R43", "gen Scalar sum jets p_{T} over 3 (N_{jets} = 4)", HTover3, nJetHTover2_Z4jet, jetHTover2_Z4jet);
     
     hresponseHTover3_Zinc3jet_R43 = newTH2D("hresponseHTover3_Zinc3jet_R43", "hresp HT/3 inc jets p_{T} (N_{jets} #geq 3)", nJetHTover2_Z3jet, jetHTover2_Z3jet, nJetHTover2_Z3jet, jetHTover2_Z3jet);
     hresponseHTover3_Zinc4jet_R43 = newTH2D("hresponseHTover3_Zinc4jet_R43", "hresp HT/3 inc jets p_{T} (N_{jets} #geq 4)", nJetHTover2_Z4jet, jetHTover2_Z4jet, nJetHTover2_Z4jet, jetHTover2_Z4jet);
     
-    hresponseHTover3_Zexc3jet_R43 = newTH2D("hresponseHTover3_Zexc3jet_R43", "hresp HT/3 exc jets p_{T} (N_{jets} #geq 3)", nJetHTover2_Z3jet, jetHTover2_Z3jet, nJetHTover2_Z3jet, jetHTover2_Z3jet);
-    hresponseHTover3_Zexc4jet_R43 = newTH2D("hresponseHTover3_Zexc4jet_R43", "hresp HT/3 exc jets p_{T} (N_{jets} #geq 4)", nJetHTover2_Z4jet, jetHTover2_Z4jet, nJetHTover2_Z4jet, jetHTover2_Z4jet);
+    hresponseHTover3_Zexc3jet_R43 = newTH2D("hresponseHTover3_Zexc3jet_R43", "hresp HT/3 exc jets p_{T} (N_{jets} = 3)", nJetHTover2_Z3jet, jetHTover2_Z3jet, nJetHTover2_Z3jet, jetHTover2_Z3jet);
+    hresponseHTover3_Zexc4jet_R43 = newTH2D("hresponseHTover3_Zexc4jet_R43", "hresp HT/3 exc jets p_{T} (N_{jets} = 4)", nJetHTover2_Z4jet, jetHTover2_Z4jet, nJetHTover2_Z4jet, jetHTover2_Z4jet);
 
 
 
