@@ -868,6 +868,30 @@ public:
     TH1D *SpTLeptons_Zinc5jet;
     TH1D *genSpTLeptons_Zinc2jet;
 
+    TH1D *LepPtPlusHTover2_Zinc2jet_R32;
+    TH1D *LepPtPlusHTover2_Zinc3jet_R32;
+    TH1D *LepPtPlusHTover2_Zinc3jet_R43;
+    TH1D *LepPtPlusHTover2_Zinc4jet_R43;
+
+    TH1D *genLepPtPlusHTover2_Zinc2jet_R32;
+    TH1D *genLepPtPlusHTover2_Zinc3jet_R32;
+    TH1D *genLepPtPlusHTover2_Zinc3jet_R43;
+    TH1D *genLepPtPlusHTover2_Zinc4jet_R43;
+
+    TH2D *hresponseLepPtPlusHTover2_Zinc2jet_R32;
+    TH2D *hresponseLepPtPlusHTover2_Zinc3jet_R32;
+    TH2D *hresponseLepPtPlusHTover2_Zinc3jet_R43;
+    TH2D *hresponseLepPtPlusHTover2_Zinc4jet_R43;
+
+    TH1D *LepPtPlusHTover3_Zinc3jet_R43;
+    TH1D *LepPtPlusHTover3_Zinc4jet_R43;
+
+    TH1D *genLepPtPlusHTover3_Zinc3jet_R43;
+    TH1D *genLepPtPlusHTover3_Zinc4jet_R43;
+
+    TH2D *hresponseLepPtPlusHTover3_Zinc3jet_R43;
+    TH2D *hresponseLepPtPlusHTover3_Zinc4jet_R43;
+
     TH1D *RatioJetPt21_Zinc2jet;
     TH1D *RatioJetPt32_Zinc3jet;
     TH1D *genRatioJetPt21_Zinc2jet;

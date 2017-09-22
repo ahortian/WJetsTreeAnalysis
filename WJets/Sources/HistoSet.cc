@@ -162,6 +162,8 @@ HistoSet::HistoSet(string leptonFlavor)
 //andrew
     string HTover2 = "H_{T}/2 [GeV]";
     string HTover3 = "H_{T}/3 [GeV]";
+    string lpT_HTover2 = "p_{T}(#mu)+H_{T}/2 [GeV]";
+    string lpT_HTover3 = "p_{T}(#mu)+H_{T}/3 [GeV]";
 
     bool doWJets = false;
     if (leptonFlavor == "Electrons" || leptonFlavor == "DE" || leptonFlavor == "DE_") {
@@ -344,6 +346,9 @@ HistoSet::HistoSet(string leptonFlavor)
     int nJetPt_ZRatios(14);
     double jetPt_ZRatios[15] = {20, 25, 30, 40, 50, 65, 80, 105, 140, 185, 235, 300, 400, 550, 900};
 
+    //same binning for all lep pt plus HT/2(3) dist.
+    int nLepJetPt_ZRatios(14);
+    double lepJetPt_ZRatios[15] = {20, 25, 30, 40, 50, 65, 80, 105, 140, 185, 235, 300, 400, 550, 900}; 
 
 
     //***************************** Basic plots for Wjets *****************************//
@@ -1395,6 +1400,32 @@ HistoSet::HistoSet(string leptonFlavor)
 
     genSpTLeptons_Zinc2jet              = newTH1D("genSpTLeptons_Zinc2jet",              "gen #Delta_{pT}^{rel} lep (N_{jets} #geq 2)",     lSpt,          50, 0, 1);
     
+    //Lepton pT plus jet HT/2 or jet HT/3
+    LepPtPlusHTover2_Zinc2jet_R32 = newTH1D("LepPtPlusHTover2_Zinc2jet_R32", "lepton pt plus HT/2 for 2 inc jet", lpT_HTover2, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+    LepPtPlusHTover2_Zinc3jet_R32 = newTH1D("LepPtPlusHTover2_Zinc3jet_R32", "lepton pt plus HT/2 for 3 inc jet", lpT_HTover2, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+    LepPtPlusHTover2_Zinc3jet_R43 = newTH1D("LepPtPlusHTover2_Zinc3jet_R43", "lepton pt plus HT/2 for 3 inc jet", lpT_HTover2, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+    LepPtPlusHTover2_Zinc4jet_R43 = newTH1D("LepPtPlusHTover2_Zinc4jet_R43", "lepton pt plus HT/2 for 4 inc jet", lpT_HTover2, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+
+    genLepPtPlusHTover2_Zinc2jet_R32 = newTH1D("genLepPtPlusHTover2_Zinc2jet_R32", "gen lepton pt plus HT/2 for 2 inc jet", lpT_HTover2, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+    genLepPtPlusHTover2_Zinc3jet_R32 = newTH1D("genLepPtPlusHTover2_Zinc3jet_R32", "gen lepton pt plus HT/2 for 3 inc jet", lpT_HTover2, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+    genLepPtPlusHTover2_Zinc3jet_R43 = newTH1D("genLepPtPlusHTover2_Zinc3jet_R43", "gen lepton pt plus HT/2 for 3 inc jet", lpT_HTover2, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+    genLepPtPlusHTover2_Zinc4jet_R43 = newTH1D("genLepPtPlusHTover2_Zinc4jet_R43", "gen lepton pt plus HT/2 for 4 inc jet", lpT_HTover2, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+
+    hresponseLepPtPlusHTover2_Zinc2jet_R32 = newTH2D("hresponseLepPtPlusHTover2_Zinc2jet_R32", "hresp lepton pt plus HT/2 for 2 inc jet", nLepJetPt_ZRatios, lepJetPt_ZRatios, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+    hresponseLepPtPlusHTover2_Zinc3jet_R32 = newTH2D("hresponseLepPtPlusHTover2_Zinc3jet_R32", "hresp lepton pt plus HT/2 for 3 inc jet", nLepJetPt_ZRatios, lepJetPt_ZRatios, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+    hresponseLepPtPlusHTover2_Zinc3jet_R43 = newTH2D("hresponseLepPtPlusHTover2_Zinc3jet_R43", "hresp lepton pt plus HT/2 for 3 inc jet", nLepJetPt_ZRatios, lepJetPt_ZRatios, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+    hresponseLepPtPlusHTover2_Zinc4jet_R43 = newTH2D("hresponseLepPtPlusHTover2_Zinc4jet_R43", "hresp lepton pt plus HT/2 for 4 inc jet", nLepJetPt_ZRatios, lepJetPt_ZRatios, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+
+    LepPtPlusHTover3_Zinc3jet_R43 = newTH1D("LepPtPlusHTover3_Zinc3jet_R43", "lepton pt plus HT/3 for 3 inc jet", lpT_HTover3, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+    LepPtPlusHTover3_Zinc4jet_R43 = newTH1D("LepPtPlusHTover3_Zinc4jet_R43", "lepton pt plus HT/3 for 4 inc jet", lpT_HTover3, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+
+    genLepPtPlusHTover3_Zinc3jet_R43 = newTH1D("genLepPtPlusHTover3_Zinc3jet_R43", "gen lepton pt plus HT/3 for 3 inc jet", lpT_HTover3, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+    genLepPtPlusHTover3_Zinc4jet_R43 = newTH1D("genLepPtPlusHTover3_Zinc4jet_R43", "gen lepton pt plus HT/3 for 4 inc jet", lpT_HTover3, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+
+    hresponseLepPtPlusHTover3_Zinc3jet_R43 = newTH2D("hresponseLepPtPlusHTover3_Zinc3jet_R43", "hresp lepton pt plus HT/3 for 3 inc jet", nLepJetPt_ZRatios, lepJetPt_ZRatios, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+    hresponseLepPtPlusHTover3_Zinc4jet_R43 = newTH2D("hresponseLepPtPlusHTover3_Zinc4jet_R43", "hresp lepton pt plus HT/3 for 4 inc jet", nLepJetPt_ZRatios, lepJetPt_ZRatios, nLepJetPt_ZRatios, lepJetPt_ZRatios);
+
+    ////
 
     RatioJetPt21_Zinc2jet              = newTH1D("RatioJetPt21_Zinc2jet",      "ratio 2nd/1st jet p_{T} (N_{jets} #geq 2)",         "p_{T}(j_{2})/p_{T}(j_{1})",    10 , 0 , 1);
     RatioJetPt32_Zinc3jet              = newTH1D("RatioJetPt32_Zinc3jet",      "ratio 3rd/2nd jet p_{T} (N_{jets} #geq 3)",         "p_{T}(j_{3})/p_{T}(j_{2})",    10 , 0 , 1);
