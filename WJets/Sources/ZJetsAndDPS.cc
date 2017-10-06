@@ -273,8 +273,8 @@ void ZJetsAndDPS::Loop(bool hasRecoInfo, bool hasGenInfo, int doQCD, bool doSSig
 
     cout << " run on " << nentries << " events" << endl;
     //--- Begin Loop All Entries --
-    //for (Long64_t jentry(0); jentry < nentries; jentry++){
-    for (Long64_t jentry(0); jentry < 500000; jentry++){
+    for (Long64_t jentry(0); jentry < nentries; jentry++){
+    //for (Long64_t jentry(0); jentry < 2000000; jentry++){
     //for (Long64_t jentry(0); jentry < 2000000; jentry++){    
         Long64_t ientry = LoadTree(jentry);
         if (ientry < 0) break;
@@ -1928,6 +1928,8 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                     
                     //andrew
                     genLeadingJetPt_Zinc1jet_R21->Fill(genJets[0].pt, genWeight);
+                    genLepPtPlusHT_Zinc1jet_R21->Fill(genLep1.Pt() + genJets[0].pt, genWeight);
+                    genLepPtPlusHT_1_Zinc1jet_R21->Fill(genLep1.Pt() + genJets[0].pt, genWeight);
 
                     genJetsHT_Zinc1jet->Fill(genJetsHT, genWeight);
                     genJetsHT_20_30_Zinc1jet->Fill(genJetsHT_20, genWeight);
@@ -1950,7 +1952,6 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
    
                         //andrew
                         genLeadingJetPt_Zexc1jet_R21->Fill(genJets[0].pt, genWeight);
-
                     }
                 }
                 if (nGoodGenJets >= 2){
@@ -1979,7 +1980,12 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                     genLeadingJetPt_Zinc2jet_R21->Fill(genJets[0].pt, genWeight);
                     genLeadingJetPt_Zinc2jet_R32->Fill(genJets[0].pt, genWeight);
                     genHTover2_Zinc2jet_R32->Fill((genJets[0].pt + genJets[1].pt)/2. , genWeight);
-                    genLepPtPlusHTover2_Zinc2jet_R32->Fill(genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., genWeight);
+                    genLepPtPlusHT_Zinc2jet_R21->Fill(genLep1.Pt() + genJets[0].pt + genJets[1].pt, genWeight);
+                    genLepPtPlusHT_Zinc2jet_R32->Fill(genLep1.Pt() + genJets[0].pt + genJets[1].pt, genWeight);
+                    genLepPtPlusHT_1_Zinc2jet_R21->Fill(genLep1.Pt() + genJets[0].pt + genJets[1].pt, genWeight);
+                    genLepPtPlusHT_1_Zinc2jet_R32->Fill(genLep1.Pt() + genJets[0].pt + genJets[1].pt, genWeight);
+                    genLepPtPlusHTover2_Zinc2jet_R32->Fill(genLep1.Pt() + (genJets[0].pt + genJets[1].pt)/2., genWeight);
+                    genLepPtPlusHTover2_1_Zinc2jet_R32->Fill(genLep1.Pt() + (genJets[0].pt + genJets[1].pt)/2., genWeight);
 
                     genSecondJetEta_Zinc2jet->Fill(fabs(genSecondJ.Eta()), genWeight);
                     genSecondJetEta_2_Zinc2jet->Fill(fabs(genSecondJ.Eta()), genWeight);
@@ -2269,9 +2275,17 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                     genHTover2_Zinc3jet_R32->Fill((genJets[0].pt + genJets[1].pt)/2. , genWeight);
                     genHTover2_Zinc3jet_R43->Fill((genJets[0].pt + genJets[1].pt)/2. , genWeight);
                     genHTover3_Zinc3jet_R43->Fill((genJets[0].pt + genJets[1].pt + genJets[2].pt)/3. , genWeight);        
+                    genLepPtPlusHT_Zinc3jet_R32->Fill(genLep1.Pt() + genJets[0].pt + genJets[1].pt + genJets[2].pt, genWeight);
+                    genLepPtPlusHT_Zinc3jet_R43->Fill(genLep1.Pt() + genJets[0].pt + genJets[1].pt + genJets[2].pt, genWeight);
+                    genLepPtPlusHT_1_Zinc3jet_R32->Fill(genLep1.Pt() + genJets[0].pt + genJets[1].pt + genJets[2].pt, genWeight);
+                    genLepPtPlusHT_1_Zinc3jet_R43->Fill(genLep1.Pt() + genJets[0].pt + genJets[1].pt + genJets[2].pt, genWeight);
                     genLepPtPlusHTover2_Zinc3jet_R32->Fill(genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., genWeight);
                     genLepPtPlusHTover2_Zinc3jet_R43->Fill(genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., genWeight);
-                    genLepPtPlusHTover3_Zinc3jet_R43->Fill(genLep1.Pt()+(genJets[0].pt + genJets[1].pt + genJets[2].pt)/3., genWeight);               
+                    genLepPtPlusHTover2_1_Zinc3jet_R32->Fill(genLep1.Pt() + (genJets[0].pt + genJets[1].pt)/2., genWeight);
+                    genLepPtPlusHTover2_1_Zinc3jet_R43->Fill(genLep1.Pt() + (genJets[0].pt + genJets[1].pt)/2., genWeight);
+                    genLepPtPlusHTover3_1_Zinc3jet_R43->Fill(genLep1.Pt() + (genJets[0].pt + genJets[1].pt + genJets[2].pt)/3., genWeight);
+                    genLepPtPlusHTover3_Zinc3jet_R43->Fill(genLep1.Pt()+(genJets[0].pt + genJets[1].pt + genJets[2].pt)/3., genWeight); 
+                    
 
                     genThirdJetEta_Zinc3jet->Fill(fabs(genJets[2].eta), genWeight);
                     genThirdJetEta_2_Zinc3jet->Fill(fabs(genJets[2].eta), genWeight);
@@ -2358,8 +2372,12 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                     genLeadingJetPt_Zinc4jet_R43->Fill(genJets[0].pt, genWeight);
                     genHTover2_Zinc4jet_R43->Fill((genJets[0].pt + genJets[1].pt)/2. , genWeight);
                     genHTover3_Zinc4jet_R43->Fill((genJets[0].pt + genJets[1].pt + genJets[2].pt)/3., genWeight);
+                    genLepPtPlusHT_Zinc4jet_R43->Fill(genLep1.Pt()+genJets[0].pt + genJets[1].pt + genJets[2].pt+genJets[3].pt, genWeight);
+                    genLepPtPlusHT_1_Zinc4jet_R43->Fill(genLep1.Pt()+genJets[0].pt + genJets[1].pt + genJets[2].pt+genJets[3].pt, genWeight);
                     genLepPtPlusHTover2_Zinc4jet_R43->Fill(genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., genWeight);
+                    genLepPtPlusHTover2_1_Zinc4jet_R43->Fill(genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., genWeight);
                     genLepPtPlusHTover3_Zinc4jet_R43->Fill(genLep1.Pt()+(genJets[0].pt + genJets[1].pt + genJets[2].pt)/3., genWeight);
+                    genLepPtPlusHTover3_1_Zinc4jet_R43->Fill(genLep1.Pt()+(genJets[0].pt + genJets[1].pt + genJets[2].pt)/3., genWeight);
 
                     genJetsHT_Zinc4jet->Fill(genJetsHT, genWeight);
                     genJetsHT_1_Zinc4jet->Fill(genJetsHT, genWeight);
@@ -2630,6 +2648,8 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
 
                 //andrew
 		LeadingJetPt_Zinc1jet_R21->Fill(jets[0].pt, weight);                
+                LepPtPlusHT_Zinc1jet_R21->Fill(lepton1.pt + jets[0].pt, weight);
+                LepPtPlusHT_1_Zinc1jet_R21->Fill(lepton1.pt + jets[0].pt, weight);
 
                 if (nGoodJets == 1){
                     // compute Delta pt between Z and jets
@@ -2767,7 +2787,12 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 HTover2_Zinc2jet_R32->Fill((jets[0].pt + jets[1].pt)/2. , weight);
                 LeadingJetPt_Zinc2jet_R21->Fill(jets[0].pt, weight);
                 LeadingJetPt_Zinc2jet_R32->Fill(jets[0].pt, weight);
+                LepPtPlusHT_Zinc2jet_R21->Fill(lepton1.pt + jets[0].pt + jets[1].pt, weight);
+                LepPtPlusHT_Zinc2jet_R32->Fill(lepton1.pt + jets[0].pt + jets[1].pt, weight);
+                LepPtPlusHT_1_Zinc2jet_R21->Fill(lepton1.pt + jets[0].pt + jets[1].pt, weight);
+                LepPtPlusHT_1_Zinc2jet_R32->Fill(lepton1.pt + jets[0].pt + jets[1].pt, weight);
                 LepPtPlusHTover2_Zinc2jet_R32->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., weight);
+                LepPtPlusHTover2_1_Zinc2jet_R32->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., weight);
 
                 for ( int i =0 ; i < NbinsEta2D - 1 ; i++){
                     if ( fabs(jets[1].eta) >= j_Y_range[i] &&  fabs(jets[1].eta) < j_Y_range[i+1]) SecondJetPt_Zinc2jet_Eta[i]->Fill(fabs(jets[0].pt), weight);
@@ -3197,9 +3222,16 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 HTover3_Zinc3jet_R43->Fill((jets[0].pt + jets[1].pt + jets[2].pt)/3., weight);
                 LeadingJetPt_Zinc3jet_R32->Fill(jets[0].pt, weight);
                 LeadingJetPt_Zinc3jet_R43->Fill(jets[0].pt, weight);
+                LepPtPlusHT_Zinc3jet_R32->Fill(lepton1.pt + jets[0].pt + jets[1].pt + jets[2].pt, weight);
+                LepPtPlusHT_Zinc3jet_R43->Fill(lepton1.pt + jets[0].pt + jets[1].pt + jets[2].pt, weight);
+                LepPtPlusHT_1_Zinc3jet_R32->Fill(lepton1.pt + jets[0].pt + jets[1].pt + jets[2].pt, weight);
+                LepPtPlusHT_1_Zinc3jet_R43->Fill(lepton1.pt + jets[0].pt + jets[1].pt + jets[2].pt, weight);
                 LepPtPlusHTover2_Zinc3jet_R32->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., weight);
                 LepPtPlusHTover2_Zinc3jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., weight);
+                LepPtPlusHTover2_1_Zinc3jet_R32->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., weight);
+                LepPtPlusHTover2_1_Zinc3jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., weight);
                 LepPtPlusHTover3_Zinc3jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt + jets[2].pt)/3., weight);
+                LepPtPlusHTover3_1_Zinc3jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt + jets[2].pt)/3., weight);
 
                 if (nGoodJets == 3){
                     nEventsExcl3Jets++;
@@ -3288,8 +3320,12 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 HTover2_Zinc4jet_R43->Fill((jets[0].pt + jets[1].pt)/2. , weight);
                 HTover3_Zinc4jet_R43->Fill((jets[0].pt + jets[1].pt + jets[2].pt)/3., weight);
                 LeadingJetPt_Zinc4jet_R43->Fill(jets[0].pt, weight);
+                LepPtPlusHT_Zinc4jet_R43->Fill(lepton1.pt + jets[0].pt + jets[1].pt + jets[2].pt + jets[3].pt, weight);
+                LepPtPlusHT_1_Zinc4jet_R43->Fill(lepton1.pt + jets[0].pt + jets[1].pt + jets[2].pt + jets[3].pt, weight);
                 LepPtPlusHTover2_Zinc4jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., weight);
+                LepPtPlusHTover2_1_Zinc4jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., weight);
                 LepPtPlusHTover3_Zinc4jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt + jets[2].pt)/3., weight);
+                LepPtPlusHTover3_1_Zinc4jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt + jets[2].pt)/3., weight);
 
                 if (nGoodJets == 4){
                     ZNGoodJets_Zexc_NoWeight->Fill(4.);
@@ -3486,6 +3522,8 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 
                 //andrew edit
                 hresponseLeadingJetPt_Zinc1jet_R21->Fill(jets[0].pt, genJets[0].pt, weight);
+                hresponseLepPtPlusHT_Zinc1jet_R21->Fill(lepton1.pt + jets[0].pt, genLep1.Pt()+genJets[0].pt, weight);
+                hresponseLepPtPlusHT_1_Zinc1jet_R21->Fill(lepton1.pt + jets[0].pt, genLep1.Pt()+genJets[0].pt, weight);
                 if (nGoodGenJets == 1 && nGoodJets == 1){
                     hresponseLeadingJetPt_Zexc1jet_R21->Fill(jets[0].pt, genJets[0].pt, weight);
                 }
@@ -3536,8 +3574,13 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 //andrew edit
                 hresponseLeadingJetPt_Zinc2jet_R21->Fill(jets[0].pt, genJets[0].pt, weight);
                 hresponseLeadingJetPt_Zinc2jet_R32->Fill(jets[0].pt, genJets[0].pt, weight);
+                hresponseLepPtPlusHT_Zinc2jet_R21->Fill(lepton1.pt + jets[0].pt + jets[1].pt, genLep1.Pt() + genJets[0].pt + genJets[1].pt, weight);
+                hresponseLepPtPlusHT_Zinc2jet_R32->Fill(lepton1.pt + jets[0].pt + jets[1].pt, genLep1.Pt() + genJets[0].pt + genJets[1].pt, weight);
+                hresponseLepPtPlusHT_1_Zinc2jet_R21->Fill(lepton1.pt + jets[0].pt + jets[1].pt, genLep1.Pt() + genJets[0].pt + genJets[1].pt, weight);
+                hresponseLepPtPlusHT_1_Zinc2jet_R32->Fill(lepton1.pt + jets[0].pt + jets[1].pt, genLep1.Pt() + genJets[0].pt + genJets[1].pt, weight);
                 hresponseHTover2_Zinc2jet_R32->Fill((jets[0].pt+jets[1].pt)/2., (genJets[0].pt+genJets[1].pt)/2., weight);
                 hresponseLepPtPlusHTover2_Zinc2jet_R32->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., weight);
+                hresponseLepPtPlusHTover2_1_Zinc2jet_R32->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., weight);
                 if (nGoodGenJets == 2 && nGoodJets == 2){
                     hresponseLeadingJetPt_Zexc2jet_R21->Fill(jets[0].pt, genJets[0].pt, weight);
                     hresponseLeadingJetPt_Zexc2jet_R32->Fill(jets[0].pt, genJets[0].pt, weight);
@@ -3587,9 +3630,16 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 hresponseHTover2_Zinc3jet_R32->Fill((jets[0].pt+jets[1].pt)/2., (genJets[0].pt+genJets[1].pt)/2., weight);
                 hresponseHTover2_Zinc3jet_R43->Fill((jets[0].pt+jets[1].pt)/2., (genJets[0].pt+genJets[1].pt)/2., weight);
                 hresponseHTover3_Zinc3jet_R43->Fill((jets[0].pt+jets[1].pt+jets[2].pt)/3., (genJets[0].pt+genJets[1].pt+genJets[2].pt)/3., weight);
+                hresponseLepPtPlusHT_Zinc3jet_R32->Fill(lepton1.pt+jets[0].pt+jets[1].pt+jets[2].pt, genLep1.Pt()+genJets[0].pt+genJets[1].pt+genJets[2].pt, weight);
+                hresponseLepPtPlusHT_Zinc3jet_R43->Fill(lepton1.pt+jets[0].pt+jets[1].pt+jets[2].pt, genLep1.Pt()+genJets[0].pt+genJets[1].pt+genJets[2].pt, weight);
+                hresponseLepPtPlusHT_1_Zinc3jet_R32->Fill(lepton1.pt+jets[0].pt+jets[1].pt+jets[2].pt, genLep1.Pt()+genJets[0].pt+genJets[1].pt+genJets[2].pt, weight);
+                hresponseLepPtPlusHT_1_Zinc3jet_R43->Fill(lepton1.pt+jets[0].pt+jets[1].pt+jets[2].pt, genLep1.Pt()+genJets[0].pt+genJets[1].pt+genJets[2].pt, weight);
                 hresponseLepPtPlusHTover2_Zinc3jet_R32->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., weight);
                 hresponseLepPtPlusHTover2_Zinc3jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., weight);
+                hresponseLepPtPlusHTover2_1_Zinc3jet_R32->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., weight);       
+                hresponseLepPtPlusHTover2_1_Zinc3jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., weight);
                 hresponseLepPtPlusHTover3_Zinc3jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., weight);
+                hresponseLepPtPlusHTover3_1_Zinc3jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., weight);
                 if (nGoodGenJets == 3 && nGoodJets == 3){
                     hresponseLeadingJetPt_Zexc3jet_R32->Fill(jets[0].pt, genJets[0].pt, weight);
                     hresponseLeadingJetPt_Zexc3jet_R43->Fill(jets[0].pt, genJets[0].pt, weight);
@@ -3633,8 +3683,12 @@ if (DEBUG) cout << "Stop after line " << __LINE__ << endl;
                 hresponseLeadingJetPt_Zinc4jet_R43->Fill(jets[0].pt, genJets[0].pt, weight);
                 hresponseHTover2_Zinc4jet_R43->Fill((jets[0].pt+jets[1].pt)/2., (genJets[0].pt+genJets[1].pt)/2., weight);
                 hresponseHTover3_Zinc4jet_R43->Fill((jets[0].pt+jets[1].pt+jets[2].pt)/3., (genJets[0].pt+genJets[1].pt+genJets[2].pt)/3., weight);
+                hresponseLepPtPlusHT_Zinc4jet_R43->Fill(lepton1.pt+jets[0].pt+jets[1].pt+jets[2].pt+jets[3].pt, genLep1.Pt()+genJets[0].pt+genJets[1].pt+genJets[2].pt+genJets[3].pt, weight);
+                hresponseLepPtPlusHT_1_Zinc4jet_R43->Fill(lepton1.pt+jets[0].pt+jets[1].pt+jets[2].pt+jets[3].pt, genLep1.Pt()+genJets[0].pt+genJets[1].pt+genJets[2].pt+genJets[3].pt, weight);
                 hresponseLepPtPlusHTover2_Zinc4jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., weight);
+                hresponseLepPtPlusHTover2_1_Zinc4jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt)/2., genLep1.Pt()+(genJets[0].pt + genJets[1].pt)/2., weight);
                 hresponseLepPtPlusHTover3_Zinc4jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt + jets[2].pt)/3., genLep1.Pt()+(genJets[0].pt + genJets[1].pt + genJets[2].pt)/3., weight);
+                hresponseLepPtPlusHTover3_1_Zinc4jet_R43->Fill(lepton1.pt + (jets[0].pt+jets[1].pt + jets[2].pt)/3., genLep1.Pt()+(genJets[0].pt + genJets[1].pt + genJets[2].pt)/3., weight);
                 if (nGoodGenJets == 4 && nGoodJets == 4){
                     hresponseLeadingJetPt_Zexc4jet_R43->Fill(jets[0].pt, genJets[0].pt, weight);
                     hresponseHTover2_Zexc4jet_R43->Fill((jets[0].pt+jets[1].pt)/2., (genJets[0].pt+genJets[1].pt)/2., weight);
